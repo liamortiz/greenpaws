@@ -11,6 +11,8 @@
 # production
 /build
 
+/api/cloudinary.yml
+
 # misc
 .DS_Store
 .env.local
