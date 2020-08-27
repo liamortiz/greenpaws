@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image } from 'cloudinary-react';
 import { CLOUD_NAME } from '../App';
 
-class Product extends Component {
-    state={product: {title: "", description: "", category: "", image_urls: []}}
-    componentDidMount() {
-        fetch('http://localhost:8080/products/1')
-        .then(resp => resp.json())
-        .then(product => {
-            console.log(product);
-            this.setState({
-                product: product
-            })
-        })
-    }
-    render() {
-        return (
-            <div className="products">
-                <h1>{this.state.product.title}</h1>
-                <p>{this.state.product.description}</p>
-                <Image cloudName={CLOUD_NAME} publicId={`${this.state.product.category}/${this.state.product.sku}/${this.state.product.image_urls[0]}`}>
-                </Image>
-            </div>
-        )
-    }
+const Product = props => {
+    const { title, description, price, image_urls, category, sku } = props.product
+    return (
+        <>
+            <h1>{title}</h1>
+            <p>{price}</p>
+    <p>{sku}</p>
+            <Image cloudName={CLOUD_NAME} publicId={`${category}/${sku}/${image_urls[0]}`} />
+            <p>{description}</p>
+        </>
+    )
 }
 export default Product;

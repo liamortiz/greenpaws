@@ -1,5 +1,10 @@
 class ProductsController < ApplicationController
 
+    def index
+        products = Product.all
+        render json: products
+    end
+
     def create
         product = Product.create(product_params)
         puts product.price
@@ -12,6 +17,24 @@ class ProductsController < ApplicationController
 
     def show
         render json: Product.find(params['id'])
+    end
+
+    def filter_category
+        category = Category.find_by(name: params["category"])
+        if category
+            render json: category.products
+        else
+            render json: {message: "Category not found", status: '404'}
+        end
+    end
+
+    def filter_brand
+        brand = Brand.find_by(name: params["brand"])
+        if brand
+            render json: brand.products
+        else
+            render json: {message: "Brand not found", status: '404'}
+        end
     end
 
     def product_params

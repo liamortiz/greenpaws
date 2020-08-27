@@ -59,4 +59,4 @@ function seed() {
   })
 }
 
-//seed()
+export default seed;

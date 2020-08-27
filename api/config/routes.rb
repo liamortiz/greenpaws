@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :cart_products
   resources :carts
   resources :reviews
+  
+  get '/products/category/:category', to: 'products#filter_category'
+  get '/products/brands/:brand', to: 'products#filter_brand'
   resources :products
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
