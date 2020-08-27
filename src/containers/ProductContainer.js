@@ -20,11 +20,11 @@ class ProductContainer extends Component {
     }
     componentDidMount() {
         //this.fetchProducts()
-        console.log(this.props);
+        console.log(this.props.match.params);
     }
 
     render() {
-        return (
+        return ( 
             <div className = "product-wrapper">
                 <h1>Hello from product container</h1>
             </div>

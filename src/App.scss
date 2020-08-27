@@ -51,6 +51,7 @@ button {
     font-family: 'Rubik';
     .paws {
         vertical-align: middle;
+        margin-left: .2em;
         background-image: url('./assets/icons/logo-paws.svg');
     }
 }
@@ -76,11 +77,11 @@ nav {
             transition: background-color .2s ease-in-out;
             padding: .5em;
             &:hover {
-                cursor: pointer;
                 background-color: darken($color: $main-color, $amount: 5%);
             }
         }
         .expandable {
+            position: relative;
             &::after {
                 content: ' ';
                 display: inline-block;
@@ -127,13 +128,12 @@ nav {
     .right-side {
         flex: 1;
         display: flex;
-        margin-left: 1em;
         justify-content: flex-end;
-        padding-right: 2em;
         .container {
             max-width: 6rem;
             text-align: center;
             flex: 1;
+            margin: 0 .8em 0 .8em;
             &:hover {
                 cursor: pointer;
             }
@@ -157,6 +157,17 @@ nav {
             height: 1.4em;
             background-image: url('./assets/icons/cart.svg');
         }
+    }
+    .dropdown {
+        position: absolute;
+        width: 20rem;
+        height: 20rem;
+        background: white;
+        border-radius: 5px;
+        top: 2.5em;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .4s ease-in-out;
     }
 }
 
