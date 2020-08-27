@@ -1,5 +1,6 @@
 /* Globals */
 $main-color: #36c983;
+$secondary-color: #2993e9;
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +9,27 @@ $main-color: #36c983;
     font-family: 'Rubik';
     src: url('./assets/fonts/Rubik-Regular.ttf')
 }
+button {
+    color: white;
+    border: none;
+    background-color: $main-color;
+    padding: .4em;
+    font-family: 'Rubik';
+    box-sizing: border-box;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.icon {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .wrapper {
 }
 
@@ -16,16 +38,9 @@ $main-color: #36c983;
     font-size: 200%;
     text-indent: .5em;
     font-family: 'Rubik';
-    vertical-align: middle;
-    display: table-cell;
     .paws {
-        display: inline-block;
         vertical-align: middle;
-        width: 2rem;
-        height: 2rem;
         background-image: url('./assets/icons/logo-paws.svg');
-        background-position: center;
-        background-size: contain;
     }
 }
 nav {
@@ -33,16 +48,83 @@ nav {
     color: white;
     height: 5em;
     background: $main-color;
-    display: table;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    ul {
+        li {
+            float: left;
+            list-style-type: none;
+            margin: 0 2em 0 2em;
+            font-family: 'Rubik';
+            font-size: 110%;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .expandable {
+            &::after {
+                content: ' ';
+                display: inline-block;
+                width: .8rem;
+                height: 1rem;
+                margin-left: .4em;
+                vertical-align: middle;
+                background-image: url('./assets/icons/down-arrow.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+        }
+    }
+    .search-bar {
+        flex: 2;
+        .search-wrapper {
+            width: 100%;
+            display: flex;
+        }
+        input {
+            flex: 1;
+            padding: .6em;
+            box-sizing: border-box;
+            border: 0;
+            font-family: 'Rubik';
+            &:focus {
+                border: 0;
+                outline: none;
+            }
+        }
+        button {
+            display: inline-block;
+            background-color:white;
+            width: 3rem;
+            .search {
+                width: 1.2rem;
+                height: 1.2rem;
+                padding-left: 1.2em;
+                background-image: url('./assets/icons/search.svg');
+            }
+        }
+    }
+    .right-side {
+        flex: 2;
+        margin-left: 1em;
+        .account {
+            background-image: url('./assets/icons/user.svg');
+        }
+    }
 }
 
 /* Home Page */
 .home-wrapper {
     .discount-bar {
         text-align: center;
-        background: darken($color: $main-color, $amount: 5%);
+        background: $secondary-color;
         color: white;
         font-family: 'Rubik';
+        font-size: 90%;
+        height: 2rem;
+        box-sizing: border-box;
         padding: .5em;
     }
 }
