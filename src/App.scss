@@ -1,0 +1,48 @@
+/* Globals */
+$main-color: #36c983;
+* {
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'Rubik';
+    src: url('./assets/fonts/Rubik-Regular.ttf')
+}
+.wrapper {
+}
+
+/* Navigation and Logo */
+.logo {
+    font-size: 200%;
+    text-indent: .5em;
+    font-family: 'Rubik';
+    vertical-align: middle;
+    display: table-cell;
+    .paws {
+        display: inline-block;
+        vertical-align: middle;
+        width: 2rem;
+        height: 2rem;
+        background-image: url('./assets/icons/logo-paws.svg');
+        background-position: center;
+        background-size: contain;
+    }
+}
+nav {
+    width: 100%;
+    color: white;
+    height: 5em;
+    background: $main-color;
+    display: table;
+}
+
+/* Home Page */
+.home-wrapper {
+    .discount-bar {
+        text-align: center;
+        background: darken($color: $main-color, $amount: 5%);
+        color: white;
+        font-family: 'Rubik';
+        padding: .5em;
+    }
+}
