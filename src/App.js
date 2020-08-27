@@ -1,9 +1,13 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import ProductContainer from './containers/ProductContainer';
-import Navigation from './components/Navigation';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import Home from './containers/Home';
+import Navigation from './components/Navigation';
+import ProductContainer from './containers/ProductContainer';
+import BrandContainer from './containers/BrandContainer';
+import SaleContainer from './containers/SaleContainer';
+
 import seed from './seed';
 
 export const CLOUD_NAME = 'dwfq3yxlm';
@@ -17,8 +21,10 @@ function App() {
       <Switch>
         <div className="App">
           <Navigation />
-          <Home />
-          <ProductContainer />
+          <Route exact path = '/' component={Home}/>
+          <Route path = '/products' component={ProductContainer}/>
+          <Route path = '/brands' component={BrandContainer} />
+          <Route path = '/sales' component={SaleContainer} />
         </div>
       </Switch>
     </Router>

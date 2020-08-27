@@ -30,6 +30,17 @@ button {
     background-repeat: no-repeat;
 }
 
+.discount-bar {
+    text-align: center;
+    background: $secondary-color;
+    color: white;
+    font-family: 'Rubik';
+    font-size: 90%;
+    height: 2rem;
+    box-sizing: border-box;
+    padding: .5em;
+}
+
 .wrapper {
 }
 
@@ -51,15 +62,22 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    a {
+        color: white;
+        text-decoration: none;
+    }
     ul {
         li {
             float: left;
             list-style-type: none;
-            margin: 0 2em 0 2em;
+            margin: 0 1em 0 1em;
             font-family: 'Rubik';
             font-size: 110%;
+            transition: background-color .2s ease-in-out;
+            padding: .5em;
             &:hover {
                 cursor: pointer;
+                background-color: darken($color: $main-color, $amount: 5%);
             }
         }
         .expandable {
@@ -107,24 +125,42 @@ nav {
         }
     }
     .right-side {
-        flex: 2;
+        flex: 1;
+        display: flex;
         margin-left: 1em;
+        justify-content: flex-end;
+        padding-right: 2em;
+        .container {
+            max-width: 6rem;
+            text-align: center;
+            flex: 1;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        p {
+            display: inline-block;
+            align-items: center;
+            font-family: 'Rubik';
+        }
         .account {
+            display: block;
+            margin: 0 auto;
+            width: 1.4em;
+            height: 1.4em;
             background-image: url('./assets/icons/user.svg');
+        }
+        .cart {
+            display: block;
+            margin: 0 auto;
+            width: 1.4em;
+            height: 1.4em;
+            background-image: url('./assets/icons/cart.svg');
         }
     }
 }
 
 /* Home Page */
 .home-wrapper {
-    .discount-bar {
-        text-align: center;
-        background: $secondary-color;
-        color: white;
-        font-family: 'Rubik';
-        font-size: 90%;
-        height: 2rem;
-        box-sizing: border-box;
-        padding: .5em;
-    }
+
 }
