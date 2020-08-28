@@ -14,14 +14,15 @@ const BRANDS = [
 
 const BrandsDropdown = () => {
     function getImages() {
-        return BRANDS.map(brand =>
-                <img src={require(`../../assets/images/brands/${brand}`)} alt={brand}/> 
+        return BRANDS.map((brand, index) =>
+                <Link key = {index} className = "image-links" to=""><img src={require(`../../assets/images/brands/${brand}`)} alt={brand}/> </Link>
             )
     }
     return (
         <div>
+            <h2>Check out our most popular brands</h2>
             {getImages()}
-            <Link className="all-brands-btn" to=''>All Brands</Link>
+            <Link className="btn all-brands-btn" to="">All Brands</Link>
         </div>
     )
 }

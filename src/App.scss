@@ -20,6 +20,16 @@ button {
         cursor: pointer;
     }
 }
+.btn {
+    background: $main-color;
+    width: 10rem;
+    border-radius: 5px;
+    transition: background-color .2s ease-in-out;
+    text-align: center;
+    &:hover {
+        background-color: darken($color: $main-color, $amount: 2%);
+    }
+}
 
 .icon {
     display: inline-block;
@@ -29,18 +39,6 @@ button {
     background-size: contain;
     background-repeat: no-repeat;
 }
-
-.discount-bar {
-    text-align: center;
-    background: $secondary-color;
-    color: white;
-    font-family: 'Rubik';
-    font-size: 90%;
-    height: 2rem;
-    box-sizing: border-box;
-    padding: .5em;
-}
-
 .wrapper {
 }
 
@@ -60,14 +58,17 @@ button {
     height: 20rem;
     background: $secondary-color;
     border-radius: 10px;
-    top: 3.5em;
+    top: 2em;
     left:0;
     max-height: 0;
     overflow: hidden;
     transition: max-height .4s ease-in-out;
     color: white;
     text-align: left;
-    a {
+    &:hover {
+        cursor: default;
+    }
+    a:not(.btn):not(.image-links) {
         color: white;
         font-size: 90%;
         &:hover {
@@ -77,14 +78,32 @@ button {
             }
         }
     }
+    .btn {
+        padding: .5em .2em;
+        margin-top: 1.5em;
+    }
     h2 {
-        font-size: 120%;
+        font-size: 140%;
         margin-bottom: 1em;
+    }
+    .pet-food {
+        margin-left: .5em;
+        width: 2.5rem;
+        height: 2.5rem;
+        vertical-align: middle;
+        background-image: url('./assets/icons/pet-food.svg');
+    }
+    .pet-supplies {
+        margin-left: .5em;
+        width: 2.5rem;
+        height: 2.5rem;
+        vertical-align: middle;
+        background-image: url('./assets/icons/supplies.svg');
     }
 }
 .shop-dropdown {
     width: 30rem;
-    height: 15rem;
+    height: 18rem;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -98,12 +117,16 @@ button {
     }
 }
 .brands-dropdown {
-    width: 35.4rem;
-    height: 23rem;
+    width: 36rem;
+    height: 25rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: row;
+    text-align: center;
+    h2 {
+        font-size: 110%;
+    }
     div {
         padding: 2em;
     }
@@ -122,6 +145,23 @@ button {
         display: block;
         margin: 1em auto;
     }
+    .image-links {
+        &:hover {
+            img {
+                opacity: 0.9;
+            }
+        }
+    }
+}
+.discount-bar {
+    text-align: center;
+    background: $secondary-color;
+    color: white;
+    font-family: 'Rubik';
+    font-size: 90%;
+    height: 2rem;
+    box-sizing: border-box;
+    padding: .5em;
 }
 
 nav {
@@ -146,6 +186,7 @@ nav {
             transition: background-color .2s ease-in-out;
             padding: .5em;
             &:hover {
+                cursor: pointer;
                 background-color: darken($color: $main-color, $amount: 5%);
             }
         }
@@ -198,14 +239,18 @@ nav {
         flex: 1;
         display: flex;
         justify-content: flex-end;
+        max-width: 15rem;
         .container {
             max-width: 6rem;
             text-align: center;
             flex: 1;
-            margin: 0 .8em 0 .8em;
+            margin-left: 2em;
+            margin-right: 2em;
             &:hover {
                 cursor: pointer;
+                opacity: 0.9;
             }
+            
         }
         p {
             display: inline-block;
@@ -215,15 +260,15 @@ nav {
         .account {
             display: block;
             margin: 0 auto;
-            width: 1.4em;
-            height: 1.4em;
+            width: 1.3em;
+            height: 1.3em;
             background-image: url('./assets/icons/user.svg');
         }
         .cart {
             display: block;
             margin: 0 auto;
-            width: 1.4em;
-            height: 1.4em;
+            width: 1.3em;
+            height: 1.3em;
             background-image: url('./assets/icons/cart.svg');
         }
     }

@@ -5,20 +5,20 @@ const ShopDropdown = () => {
     return (
         <>
             <div>
-                <h2>Food</h2>
-                <Link>Wet Food</Link>
-                <Link>Dry Food</Link>
-                <Link>Puppy Food</Link>
-                <Link>Grain Free Food</Link>
-                <Link>Shop All Food</Link>
+                <h2>Food<i className = "icon pet-food"></i></h2>
+                <Link to="">Wet Food</Link>
+                <Link to="">Dry Food</Link>
+                <Link to="">Puppy Food</Link>
+                <Link to="">Grain Free Food</Link>
+                <Link to="" className="btn">Shop All Food</Link>
             </div>
             <div>
-                <h2>Supplies</h2>
-                <Link>Apparel</Link>
-                <Link>Beds & Bedding</Link>
-                <Link>Bowls & Feeders</Link>
-                <Link>Dental Care</Link>
-                <Link>Shop All Supplies</Link>
+                <h2>Supplies<i className = "icon pet-supplies"></i></h2>
+                <Link to="">Apparel</Link>
+                <Link to="">Beds & Bedding</Link>
+                <Link to="">Bowls & Feeders</Link>
+                <Link to="">Dental Care</Link>
+                <Link to="" className="btn">Shop All Supplies</Link>
             </div>
         </>
     )
