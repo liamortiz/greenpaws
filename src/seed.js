@@ -1,7 +1,9 @@
 import faker from 'faker';
 import products from './data.json';
+import reviews from './food-reviews.json';
 
 const BRANDS=765
+const USERS=100
 const CATES=[
   "beds",
   "collars",
@@ -34,6 +36,8 @@ function getDiscount(price) {
   return discount;
 }
 
+
+
 function seed() {
   products.forEach(product => {
     const brand = Math.floor(Math.random() * BRANDS) + 1;
@@ -47,11 +51,23 @@ function seed() {
     product['category_id'] = category;
     product['discount'] = discount;
     product['price'] = price;
-
-    fetch('http://localhost:8080/products/', {
+    
+    fetch('http://localhost:8080/products', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'product': product})
+
+    }).catch(err => {
+      console.log(err);
+    })
+
+  })
+  // Create reviews
+  reviews.forEach(review => {
+    fetch('http://localhost:8080/reviews', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'review': review})
 
     }).catch(err => {
       console.log(err);

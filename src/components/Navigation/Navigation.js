@@ -65,13 +65,13 @@ const Navigation = () => {
 
             <div className="nav-items right-side">
                 <Link to="">
-                    <div className="container account-container">
+                    <div className="small-container account-container">
                         <i className="icon account"></i>
                         <p>Account</p>
                     </div>
                 </Link>
                 <Link to="">
-                    <div className="container cart-container">
+                    <div className="small-container cart-container">
                         <i className="icon cart"></i>
                         <p>Cart</p>
                     </div>
