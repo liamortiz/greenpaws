@@ -4,7 +4,7 @@
  const Home = () => {
      return (
          <div className="wrapper home-wrapper">
-             <img src={mainHero} />
+             
          </div>
      )
  }
