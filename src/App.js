@@ -9,6 +9,7 @@ import ProductContainer from './containers/ProductContainer';
 import BrandContainer from './containers/BrandContainer';
 import SaleContainer from './containers/SaleContainer';
 import Footer from './containers/Footer';
+import RegisterContainer from './containers/RegisterContainer';
 
 import seed from './seed';
 
@@ -29,6 +30,7 @@ function App() {
           <Route path = '/products/:params1/:params2' component={ProductContainer}/>
           <Route path = '/brands' component={BrandContainer} />
           <Route path = '/sales' component={SaleContainer} />
+          <Route path = '/register' component={RegisterContainer} />
           <Footer />
         </div>
       </Switch>

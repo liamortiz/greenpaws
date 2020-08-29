@@ -47,7 +47,7 @@ class Home extends Component {
                     <div className="details">
                         <h3>{product.title.slice(0, 45)}..</h3>
                         <p className="current-price">${ this.getDiscountPrice(product) }</p>
-                        { product.discount != 0 && <p className="previous-price">${this.paddPrice(product.price)}</p>}
+                        { product.discount !== 0 && <p className="previous-price">${this.paddPrice(product.price)}</p>}
                         <button>Add Cart</button>
                     </div>
                 </div>
