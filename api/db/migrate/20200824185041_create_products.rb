@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.string :sku
       t.text :description
       t.integer :discount, default: 0
+      t.integer :average_rating, default: 0
       t.string :image_urls, array: true, default: []
       t.integer :brand_id, null:false
       t.integer :category_id, null:false

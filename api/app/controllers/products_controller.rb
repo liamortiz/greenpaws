@@ -31,8 +31,13 @@ class ProductsController < ApplicationController
         end
     end
 
+    def popular_products
+        products = Product.all.select{|product| product.average_rating >= 4}
+        render json: products
+    end
+
     def product_params
-        params.require(:product).permit(:title, :price, :sku, :description, :discount, :brand_id,:category_id, :image_urls => [])
+        params.require(:product).permit(:title, :price, :sku, :description, :discount, :brand_id, :category_id, :image_urls => [])
     end
 
 end

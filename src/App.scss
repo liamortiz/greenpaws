@@ -15,7 +15,6 @@ button {
     background-color: $main-color;
     padding: .4em;
     font-family: 'Rubik';
-    border-radius: 5px;
     box-sizing: border-box;
     &:hover {
         cursor: pointer;
@@ -321,7 +320,6 @@ nav {
         img {
             width: 5rem;
             height: 5rem;
-            border: 1px solid red;   
         }
         p {
             display: inline-block;

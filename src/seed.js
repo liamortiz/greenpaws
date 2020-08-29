@@ -36,8 +36,6 @@ function getDiscount(price) {
   return discount;
 }
 
-
-
 function seed() {
   products.forEach(product => {
     const brand = Math.floor(Math.random() * BRANDS) + 1;
@@ -45,7 +43,7 @@ function seed() {
     const price = faker.commerce.price();
     const discount = getDiscount(price);
 
-    delete product.category;
+    delete product.category
 
     product['brand_id'] = brand;
     product['category_id'] = category;
@@ -62,6 +60,7 @@ function seed() {
     })
 
   })
+  
   // Create reviews
   reviews.forEach(review => {
     fetch('http://localhost:8080/reviews', {
@@ -73,6 +72,7 @@ function seed() {
       console.log(err);
     })
   })
+  
 }
 
 export default seed;

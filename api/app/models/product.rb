@@ -8,11 +8,11 @@ class Product < ApplicationRecord
 
     validates :title, :description, :price, :sku,  presence: true
     validates :title, :description, length: { minimum: 2 }
-    validates :price, numericality: true
+    validates :price, :average_rating, numericality: true
     validates :sku, uniqueness: true
 
     def update_average_rating
-        rating=0
+        average=0
         unless self.reviews.empty?
             total = self.reviews.sum(&:rating)
             average = (total / self.reviews.length).round

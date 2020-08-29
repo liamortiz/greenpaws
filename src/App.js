@@ -12,6 +12,7 @@ import SaleContainer from './containers/SaleContainer';
 import seed from './seed';
 
 export const CLOUD_NAME = 'dwfq3yxlm';
+export const BASE_URL = 'http://localhost:8080';
 
 
 //seed()

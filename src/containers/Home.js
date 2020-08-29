@@ -1,42 +1,55 @@
- import React from 'react';
- import Gallery from '../components/Gallery/Gallery';
+import React, { Component } from 'react';
+import Gallery from '../components/Gallery/Gallery';
+import { BASE_URL } from '../App';
+import { CLOUD_NAME } from '../App';
+import { Image } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 
- const Home = () => {
-     return (
-         <div className="wrapper home-wrapper">
-             <Gallery />
-             <div className="container top-products">
-                <h2>Customer Favorites</h2>
-                <div className="products-preview">
-                    <div className="product-box">
-                        <img src="" alt="" />
-                        <div className="details">
-                            <h3>Dog Scooper<small> Breakfast Dog Toy. Medium</small></h3>
-                            <p className="current-price">$33.25</p>
-                            <p className="previous-price">$44.20</p>
-                            <button>Add Cart</button>
-                        </div>
-                    </div>
-                    <div className="product-box">
+class Home extends Component {
+    state={products:[]}
 
-                    </div>
-                    <div className="product-box">
+    componentDidMount() {
+        this.getTopProducts();
+    }
 
-                    </div>
+    getTopProducts() {
+        fetch(BASE_URL+'/products/popular')
+            .then(resp => resp.json())
+            .then(data => this.setState({ products: data.slice(0, 6) }));
+    }
 
-                    <div className="product-box">
+    getDiscountPrice(product) {
+        return product.price - ((product.price / 100) * product.discount)
+    }
 
-                    </div>
-                    <div className="product-box">
-
-                    </div>
-                    <div className="product-box">
-
+    setProducts() {
+        return this.state.products.map((product, index) => {
+            return (
+                <div key={index} className="product-box">
+                    <Link to=""><Image cloudName={CLOUD_NAME} publicId={product.image_urls[0]} /></Link>
+                    <div className="details">
+                        <h3>{product.title.slice(0, 45)}..</h3>
+                        <p className="current-price">${ this.getDiscountPrice(product) }</p>
+                        { product.discount != 0 && <p className="previous-price">${product.price}</p>}
+                        <button>Add Cart</button>
                     </div>
                 </div>
-             </div>
-         </div>
-     )
- }
+            )
+        })
+    }
+
+    render() {
+        return (
+            <div className="wrapper home-wrapper">
+                <Gallery />
+                <div className="container top-products">
+                   <h2>Customer Favorites</h2>
+                   <div className="products-preview">
+                       {this.setProducts()}
+                   </div>
+                </div>
+            </div>
+        )
+    }
+}
  export default Home;
