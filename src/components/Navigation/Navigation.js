@@ -64,7 +64,7 @@ const Navigation = () => {
             </form>
 
             <div className="nav-items right-side">
-                <Link to="">
+                <Link to="/register">
                     <div className="small-container account-container">
                         <i className="icon account"></i>
                         <p>Account</p>

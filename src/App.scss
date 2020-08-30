@@ -508,6 +508,13 @@ nav {
             outline: none;
         }
     }
+    .error-messages {
+        color: red;
+        font-weight: bold;
+        margin-top: .5em;
+        font-size: 90%;
+        display: none;
+    }
     button {
         margin-top: 1em;
         padding: .8em;
@@ -533,6 +540,10 @@ nav {
     form {
         width: 20rem;
         margin: 0 auto;
+        a {
+            font-size: 80%;
+            margin-left: 1em;
+        }
     }
 }
 

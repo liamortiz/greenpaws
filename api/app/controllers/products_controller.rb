@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+    skip_before_action :authorized, only: [:filter_brand, :filter_category, :show, :popular_products]
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end

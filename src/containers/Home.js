@@ -87,7 +87,7 @@ class Home extends Component {
                 </div>
 
                 <div className="warm-message">
-                    <img src = {heroImage} />
+                    <img alt="doggy" src = {heroImage} />
                     <div>
                         <h2>Getting a new puppy?</h2>
                         <p>

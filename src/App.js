@@ -9,7 +9,7 @@ import ProductContainer from './containers/ProductContainer';
 import BrandContainer from './containers/BrandContainer';
 import SaleContainer from './containers/SaleContainer';
 import Footer from './containers/Footer';
-import RegisterContainer from './containers/RegisterContainer';
+import RegisterContainer from './components/Register/RegisterContainer';
 
 import seed from './seed';
 
