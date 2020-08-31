@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
         render json: Review.find(params['id'])
     end
 
+    private
     def review_params
         params.require(:review).permit(:title, :content, :user_id, :product_id, :rating)
     end

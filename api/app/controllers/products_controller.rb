@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
         render json: products
     end
 
+    private
     def product_params
         params.require(:product).permit(:title, :price, :sku, :description, :discount, :brand_id, :category_id, :image_urls => [])
     end

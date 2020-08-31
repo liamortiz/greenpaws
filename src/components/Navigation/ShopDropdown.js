@@ -14,7 +14,7 @@ const ShopDropdown = () => {
             </div>
             <div>
                 <h2>Supplies<i className = "icon pet-supplies"></i></h2>
-                <Link to="">Apparel</Link>
+                <Link to="">Toys & Apparel</Link>
                 <Link to="">Beds & Bedding</Link>
                 <Link to="">Bowls & Feeders</Link>
                 <Link to="">Dental Care</Link>

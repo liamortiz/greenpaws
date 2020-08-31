@@ -5,6 +5,8 @@ import { CLOUD_NAME } from '../App';
 import { Image } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/images/hero-4.jpg';
+import { addProductAsync } from '../redux/cart';
+import { connect } from 'react-redux';
 
 class Home extends Component {
     state={products:[]}
@@ -48,11 +50,15 @@ class Home extends Component {
                         <h3>{product.title.slice(0, 45)}..</h3>
                         <p className="current-price">${ this.getDiscountPrice(product) }</p>
                         { product.discount !== 0 && <p className="previous-price">${this.paddPrice(product.price)}</p>}
-                        <button>Add Cart</button>
+                        <button onClick = {() => this.addProductToCart(product)}>Add Cart</button>
                     </div>
                 </div>
             )
         })
+    }
+
+    addProductToCart(product) {
+        this.props.addProductAsync(product.id, this.props.cartId)
     }
 
     render() {
@@ -96,10 +102,11 @@ class Home extends Component {
                         </p>
                     </div>
                 </div>
-
-
             </div>
         )
     }
 }
- export default Home;
+const mstp = state => {
+    return {cartId: state.carts.user.cartId}
+}
+export default connect(mstp, { addProductAsync })(Home);

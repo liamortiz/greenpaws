@@ -9,4 +9,9 @@ class User < ApplicationRecord
     validates :password, length: {in: 4..25, message: "is too short or too long!"}
 
     has_secure_password
+
+
+    def products_in_cart
+        self.cart.products
+    end
 end
