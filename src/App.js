@@ -10,15 +10,10 @@ import BrandContainer from './containers/BrandContainer';
 import SaleContainer from './containers/SaleContainer';
 import Footer from './containers/Footer';
 import RegisterContainer from './components/Register/RegisterOrLogin';
-import CartContainer from './containers/CartContainer';
-
-import seed from './seed';
+import CartContainer from './components/CartPage/CartContainer';
 
 export const CLOUD_NAME = 'dwfq3yxlm';
 export const BASE_URL = 'http://localhost:8080';
-
-
-//seed()
 
 function App(props) {
   return (

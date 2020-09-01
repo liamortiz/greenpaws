@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import heroImage from '../assets/images/hero-4.jpg';
 import { addProductAsync } from '../redux/user';
 import { connect } from 'react-redux';
+import { paddPrice, getDiscountPrice } from './Product';
 
 class Home extends Component {
     state={products:[]}
@@ -28,19 +29,6 @@ class Home extends Component {
             this.setState({ products: products });
         }
     }
-    getDiscountPrice(product) {
-        return this.paddPrice((product.price - ((product.price / 100) * product.discount)).toString());
-    }
-    paddPrice(price) {
-        price = parseFloat(price).toString();
-        const decimalIndex = price.indexOf('.') + 1;
-
-        if (decimalIndex === 0) return price;
-
-        const leadingNumbers = price.substr(decimalIndex, price.length);
-        return leadingNumbers.length < 2 ? price + '0' : price;
-    }
-
     setProducts() {
         return this.state.products.map((product, index) => {
             return (
@@ -48,8 +36,8 @@ class Home extends Component {
                     <Link to=""><Image cloudName={CLOUD_NAME} publicId={product.image_urls[0]} /></Link>
                     <div className="details">
                         <h3>{product.title.slice(0, 45)}..</h3>
-                        <p className="current-price">${ this.getDiscountPrice(product) }</p>
-                        { product.discount !== 0 && <p className="previous-price">${this.paddPrice(product.price)}</p>}
+                        <p className="current-price">${ getDiscountPrice(product) }</p>
+                        { product.discount !== 0 && <p className="previous-price">${paddPrice(product.price)}</p>}
                         <button onClick = {() => this.addProductToCart(product)}>Add Cart</button>
                     </div>
                 </div>

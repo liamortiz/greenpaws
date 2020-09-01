@@ -40,6 +40,21 @@ button {
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.star {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    background-image: url('./assets//icons/star-empty.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: .5em 0;
+}
+.star-full {
+    background-image: url('./assets/icons/star-full.svg');
+}
+
 .wrapper {
     width: 100%;
 }
@@ -575,6 +590,7 @@ nav {
 .cart-wrapper {
     display: flex;
     justify-content: center;
+    margin-top: 2em;
     .product-container {
         flex: 1;
         display: flex;
@@ -593,7 +609,7 @@ nav {
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        margin: .1em 0;
+        margin: .1em auto;
         .quantity {
             border: 1px solid $border-color;
             width: 5rem;
@@ -643,6 +659,7 @@ nav {
         img {
             width: 6rem;
             height: 6rem;
+            margin-right: 1em;
         }
     }
     .checkout {
@@ -673,6 +690,73 @@ nav {
             p {
                 text-align: left;
                 margin: .3em 0;
+            }
+        }
+    }
+}
+.cart-product-previews {
+    text-align: center;
+    margin: 2em 0;
+    h2 {
+        color: $main-color;
+    }
+    .product-preview-container {
+        padding: 1em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 1500px;
+        margin: 0 auto;
+        justify-content: center;
+        .product-box-preview {
+            border: 1px solid yellow;
+            box-shadow: 5px 5px 5px rgba(56, 56, 56, 0.1);
+            border: 1px solid $border-color;
+            width: 10rem;
+            padding: 1em;
+            margin: 1em;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            .pricing {
+                flex: 1;
+                .price {
+                    min-height: 2rem;
+                }
+            }
+            button {
+                margin-top: 1em;
+                width: 8rem;
+            }
+            p {
+                text-align: left;
+                margin-left: 1.5em;
+            }
+            .previous-price {
+                text-indent: 1em;
+            }
+            .reviews {
+                position: relative;
+                .review-count {
+                    position: absolute;
+                    top: .4em;
+                    margin-left: .2em;
+                }
+            }
+            h2 {
+                text-align: left;
+                font-size: 90%;
+                color: black;
+                margin-top: 1em;
+                font-family: 'Rubik';
+                font-weight: lighter;
+                line-height: 1.5em;
+                min-height: 7rem;
+            }
+            img {
+                margin: 0 auto;
+                width: 8rem;
+                height: 8rem;
             }
         }
     }

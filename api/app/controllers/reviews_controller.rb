@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
+    skip_before_action :authorized, only: [:create]
     def create
-        review = Review.create(review_params)
+        # This needs to change before production
+        user_id = User.all.sample().id
+        product_id = Product.all.sample().id
+        review = Review.create(title: review_params['title'], content: review_params['content'], user_id: user_id, rating: review_params['rating'], product_id: product_id)
         review.product.update_average_rating
         
         if review.valid?
@@ -16,6 +20,6 @@ class ReviewsController < ApplicationController
 
     private
     def review_params
-        params.require(:review).permit(:title, :content, :user_id, :product_id, :rating)
+        params.require(:review).permit(:title, :content, :product_id, :rating)
     end
 end

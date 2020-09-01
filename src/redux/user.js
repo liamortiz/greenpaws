@@ -15,12 +15,13 @@ const defaultState = {
 export default function userReducer(state=defaultState, action = {}) {
   switch (action.type) {
     case LOGIN:
+        console.log(action.payload.user);
         const newState = {
             token: action.payload.jwt,
             user: {
                 id: action.payload.user.id,
                 cart: action.payload.user.cart,
-                productsInCart: [...state.user.productsInCart, ...action.payload.user.products_in_cart]
+                productsInCart: [...state.user.productsInCart, ...action.payload.user.cart_products]
             }
         }
         return {...state, ...newState};
@@ -31,7 +32,9 @@ export default function userReducer(state=defaultState, action = {}) {
         })
     case REMOVE_PRODUCT:
         return produce(state, draft => {
-            draft.user.productsInCart.filter(product => product.cartProductId !== action.payload)
+            const index = draft.user.productsInCart.findIndex(cartProduct => cartProduct.id === action.payload);
+            const newArr = draft.user.productsInCart.slice(0, index).concat(draft.user.productsInCart.slice(index+1, draft.user.productsInCart.length))
+            draft.user.productsInCart = newArr
         })
 
     default: return state;
@@ -81,8 +84,8 @@ export function registerUserAsync({ name, email, password }) {
     });
 }
 
-export function addProduct(data) {
-    return { type: ADD_PRODUCT_TO_CART,  payload: {...data.product, cartProductId: data.id}};
+export function addProduct(cartProduct) {
+    return { type: ADD_PRODUCT_TO_CART,  payload: cartProduct};
   }
   
 // perform the fetch calls here
@@ -97,7 +100,7 @@ export function addProductAsync(token, productId, cartId) {
     body: JSON.stringify({'cart_products': {'cart_id': cartId, 'product_id': productId}})
     })
     .then(resp => resp.json())
-    .then(product => dispatch(addProduct(product)));
+    .then(cartProduct => dispatch(addProduct(cartProduct)));
 }
 
 export function removeProduct(id) {

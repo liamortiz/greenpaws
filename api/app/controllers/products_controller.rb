@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:filter_brand, :filter_category, :show, :popular_products]
+    skip_before_action :authorized, only: [:create, :filter_brand, :filter_category, :show, :popular_products]
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end
@@ -14,31 +14,34 @@ class ProductsController < ApplicationController
     end
 
     def filter_category
-        category = Category.find_by(name: params["category"])
-        if category
-            render json: category.products
+        products = Product.select{|product| product.category == params["category"]}
+        if products
+            render json: products
         else
             render json: {message: "Category not found", status: '404'}
         end
     end
 
     def filter_brand
-        brand = Brand.find_by(name: params["brand"])
-        if brand
-            render json: brand.products
+        products = Product.select{|product| product.brand == params["brand"]}
+        if products
+            render json: products
         else
             render json: {message: "Brand not found", status: '404'}
         end
     end
 
     def popular_products
-        products = Product.all.select{|product| product.average_rating >= 4}
+        products = Product.select{|product| product.average_rating >= 4}
+        if products.size <= 0
+            products = Product.all
+        end
         render json: products
     end
 
     private
     def product_params
-        params.require(:product).permit(:title, :price, :sku, :description, :discount, :brand_id, :category_id, :image_urls => [])
+        params.require(:product).permit(:title, :price, :sku, :description, :discount, :category, :brand, :image_urls => [])
     end
 
 end
