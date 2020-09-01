@@ -1,4 +1,5 @@
 import { BASE_URL } from '../App';
+import produce from 'immer';
 
 const LOGIN   = 'users/LOGIN';
 const ADD_PRODUCT_TO_CART = 'users/ADD_PRODUCT_TO_CART';
@@ -25,9 +26,13 @@ export default function userReducer(state=defaultState, action = {}) {
         return {...state, ...newState};
 
     case ADD_PRODUCT_TO_CART:
-        return {...state, user: {productsInCart: [...state.user.productsInCart, action.payload]}};
+        return produce(state, draft => {
+            draft.user.productsInCart.push(action.payload)   
+        })
     case REMOVE_PRODUCT:
-        return {...state, user: {productsInCart: [...state.user.productsInCart, action.payload]}}
+        return produce(state, draft => {
+            draft.user.productsInCart.filter(product => product.cartProductId !== action.payload)
+        })
 
     default: return state;
   }
@@ -76,9 +81,8 @@ export function registerUserAsync({ name, email, password }) {
     });
 }
 
-export function addProduct(product) {
-    console.log(product);
-    return { type: ADD_PRODUCT_TO_CART,  payload: product};
+export function addProduct(data) {
+    return { type: ADD_PRODUCT_TO_CART,  payload: {...data.product, cartProductId: data.id}};
   }
   
 // perform the fetch calls here
@@ -94,4 +98,21 @@ export function addProductAsync(token, productId, cartId) {
     })
     .then(resp => resp.json())
     .then(product => dispatch(addProduct(product)));
+}
+
+export function removeProduct(id) {
+    return {type: REMOVE_PRODUCT, payload: id}
+}
+
+export function removeProductAsync(token, id) {
+    return (dispatch) => fetch(BASE_URL + '/cart_products/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            accepts: 'application/json'
+        }
+    })
+    .then(resp => resp.json())
+    .then(() => dispatch(removeProduct(id)))
 }

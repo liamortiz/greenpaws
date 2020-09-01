@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Image } from 'cloudinary-react';
 import { CLOUD_NAME } from '../App';
+import { removeProductAsync } from '../redux/user';
 
 class CartContainer extends Component {
     state = {
@@ -13,8 +14,8 @@ class CartContainer extends Component {
     }
     
     getProducts() {
-        return this.props.products.map(product => 
-            <div className="product-box">
+        return this.props.products.map((product, index) => 
+            <div key = {index} className="product-box">
                 <Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} />
 
                 <div className="pricing">
@@ -22,13 +23,13 @@ class CartContainer extends Component {
                     <p className="current-price">${ this.getDiscountPrice(product) }</p>
                     { product.discount !== 0 && <p className="previous-price">${this.paddPrice(product.price)}</p>}
                 </div>
+
                 <div className="quantity">
                     <button className="icon minus"></button>
                     <span>1</span>
                     <button className="icon plus"></button>
                 </div>
-
-                <button className="icon remove"></button>
+                <button onClick = {() => this.props.removeProductAsync(this.props.token, product.cartProductId)} className="icon remove"></button>
             </div>
             )
     }
@@ -78,7 +79,8 @@ class CartContainer extends Component {
 }
 const mstp = state => {
     return {
+        token: state.users.token,
         products: state.users.user.productsInCart
     }
 }
-export default connect(mstp, null)(CartContainer);
+export default connect(mstp, { removeProductAsync })(CartContainer);
