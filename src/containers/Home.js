@@ -5,7 +5,7 @@ import { CLOUD_NAME } from '../App';
 import { Image } from 'cloudinary-react';
 import { Link } from 'react-router-dom';
 import heroImage from '../assets/images/hero-4.jpg';
-import { addProductAsync } from '../redux/cart';
+import { addProductAsync } from '../redux/user';
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -58,7 +58,11 @@ class Home extends Component {
     }
 
     addProductToCart(product) {
-        this.props.addProductAsync(product.id, this.props.cartId)
+        if (this.props.token) {
+            this.props.addProductAsync(this.props.token, product.id, this.props.user.cart.id)
+        } else {
+            console.log("Add the product to the cart only on the local side, maybe a custom action");
+        }
     }
 
     render() {
@@ -107,6 +111,9 @@ class Home extends Component {
     }
 }
 const mstp = state => {
-    return {cartId: state.carts.user.cartId}
+    return {
+        token: state.users.token,
+        user: state.users.user
+    }
 }
 export default connect(mstp, { addProductAsync })(Home);

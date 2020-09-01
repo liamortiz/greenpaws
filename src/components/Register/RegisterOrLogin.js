@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
-import { BASE_URL } from '../../App';
+import { connect } from 'react-redux';
+import { loginUserAsync, registerUserAsync } from '../../redux/user';
 
 class RegisterContainer extends Component {
 
@@ -9,34 +10,16 @@ class RegisterContainer extends Component {
     accountExistsElement = React.createRef();
 
     handleLogin = (state) => {
-        fetch(BASE_URL + '/auth', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'user': state})
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            if (data.status === 401) {
-                this.errorElement.current.style="display:block";
-            } else {
-                sessionStorage.setItem('user', JSON.stringify(data))
-            }
+        this.props.loginUserAsync(state)
+        .catch(() => {
+            this.errorElement.current.style="display:block";
         })
     }
     handleSignUp = (state) => {
-        fetch(BASE_URL + '/users', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({'user': state})
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            if (data.status === 401) {
-                this.accountExistsElement.current.style="display:block";
-            } else {
-                sessionStorage.setItem('user', JSON.stringify(data))
-            }
-        })
+        this.props.registerUserAsync(state)
+        .catch(() => {
+            this.accountExistsElement.current.style="display:block"
+        });
     }
 
     render() {
@@ -59,4 +42,4 @@ class RegisterContainer extends Component {
         )
     }
 }
-export default RegisterContainer;
+export default connect(null, { loginUserAsync, registerUserAsync })(RegisterContainer);

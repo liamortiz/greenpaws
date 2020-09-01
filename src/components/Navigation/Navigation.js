@@ -83,7 +83,7 @@ class Navigation extends Component {
                             <p>Account</p>
                         </div>
                     </Link>
-                    <Link to="">
+                    <Link to="/cart">
                         <div className="small-container cart-container">
                             <i className="icon cart"></i>
                             <p>Cart</p>
@@ -99,7 +99,7 @@ class Navigation extends Component {
 }
 
 const mstp = state => {
-    return {productsInCart: state.carts.user.productsInCart.length}
+    return {productsInCart: state.users.user.productsInCart.length}
 }
 
 export default connect(mstp, null)(Navigation);
