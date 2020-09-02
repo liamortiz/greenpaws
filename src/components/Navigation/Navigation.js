@@ -71,7 +71,7 @@ class Navigation extends Component {
     
                 <form className="search-bar">
                     <div className="search-wrapper">
-                        <input type="text" placeholder="Search our products" value={this.state.query} onChange={this.handleChange}/>
+                        <input type="text" placeholder="Search Our Store" value={this.state.query} onChange={this.handleChange}/>
                         <button type="submit"><i className= "icon search"></i></button>
                     </div>
                 </form>

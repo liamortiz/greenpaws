@@ -457,6 +457,14 @@ nav {
             p {
                 margin-bottom: .8em;
             }
+            a {
+                background: $secondary-color;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                text-align: center;
+                padding: .4em 1em;
+            }
         }
         .clock {
             float: left;
@@ -758,6 +766,71 @@ nav {
                 width: 8rem;
                 height: 8rem;
             }
+        }
+    }
+}
+.checkout-wrapper {
+    background-color: rgba(56, 56, 56, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 9;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    color: black;
+    padding: 1em;
+    display: none;
+    h2 {
+        font-size: 200%;
+    }
+    form {
+        width: 40rem;
+        height: 50rem;
+        background: white;
+        border-radius: 10px;
+        margin: 1em auto;
+        padding: 1em;
+        position: relative;
+        .btn-checkout {
+            margin-top: 1.5em;
+            padding: 1em;
+        }
+        label {
+            display: block;
+            text-align: left;
+            text-indent: 9.7em;
+            margin-bottom: .4em;
+        }
+        input {
+            padding: .4em;
+            border: 1px solid $border-color;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: .7em;
+            width: 20rem;
+            height: 1.5rem;
+        }
+        .name {
+            display: inline;
+            width: 9.5rem;
+            margin: 1em .2em;
+        }
+        select {
+            width: 20.9rem;
+            padding: .5em;
+            margin-bottom: 1em;
+            border: 1px solid $border-color;
+        }
+        .remove {
+            background-image: url('./assets/icons/close.svg');
+            background-color: white;
+            width: 1.3rem;
+            height: 1.3rem;
+            position: absolute;
+            left: 94%;
+            top: 15px;
         }
     }
 }

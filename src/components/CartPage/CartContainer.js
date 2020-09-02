@@ -5,12 +5,15 @@ import { CLOUD_NAME } from '../../App';
 import { removeProductAsync, addProductAsync } from '../../redux/user';
 import { paddPrice, getDiscountPrice } from '../../containers/Product';
 import CartProductPreviews from './CartProductPreviews';
+import Checkout from './Checkout';
 
 class CartContainer extends Component {
     state = {
         total: 0,
         shippingTotal: 0
     }
+    checkoutElement = React.createRef()
+
     componentDidMount() {
         this.getTotal()
     }
@@ -65,9 +68,29 @@ class CartContainer extends Component {
         }
     }
 
+    hideCheckout = (e) => {
+        if (e) e.preventDefault();
+        
+        this.checkoutElement.current.style="display: none"
+    }
+    showCheckout = () => {
+        this.checkoutElement.current.style="display: block"
+    }
+
+    placeOrder = (e) => {
+        e.preventDefault();
+        this.props.products.forEach(({id}) => {
+            this.props.removeProductAsync(this.props.token, id)
+        })
+        this.hideCheckout();
+    }
+
     render() {
         return (
             <>
+            <div className="checkout-wrapper" ref={this.checkoutElement}>
+                <Checkout hideCheckout={this.hideCheckout} placeOrder={this.placeOrder}/>
+            </div>
             <div className="wrapper cart-wrapper">
                 <div className="product-container">
                 {this.getProducts()}
@@ -78,7 +101,7 @@ class CartContainer extends Component {
                         <p>Subtotal (<span>{this.props.products.length} items</span>): <span>${this.state.total}</span></p>
                         <p>Estimated Shipping: <span>${this.state.shippingTotal}</span></p>
                         <p>Total Before Tax: <span>${paddPrice(parseFloat(this.state.total) + parseFloat(this.state.shippingTotal))}</span></p>
-                        <button className="btn btn-checkout">Proceed to Checkout</button>
+                        <button className="btn btn-checkout" onClick={this.showCheckout}>Proceed to Checkout</button>
                     </div>
                 </div>
             </div>

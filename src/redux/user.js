@@ -15,7 +15,6 @@ const defaultState = {
 export default function userReducer(state=defaultState, action = {}) {
   switch (action.type) {
     case LOGIN:
-        console.log(action.payload.user);
         const newState = {
             token: action.payload.jwt,
             user: {

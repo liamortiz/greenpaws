@@ -69,7 +69,7 @@ class Home extends Component {
                     <div className="shipping-box">
                         <div className="shipping-signin">
                             <p>Sign In for a better experience</p>
-                            <button>Sign Up</button>
+                            <Link to ="/register">Sign Up</Link>
                         </div>
                         <div>
                             <i className="icon truck"></i>
