@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 import Home from './containers/Home';
 import Navigation from './components/Navigation/Navigation';
 import BrandContainer from './containers/BrandContainer';
-import SaleContainer from './containers/SaleContainer';
-import Footer from './containers/Footer';
+import SaleContainer from './components/SalesPage/SaleContainer';
 import RegisterContainer from './components/Register/RegisterOrLogin';
 import CartContainer from './components/CartPage/CartContainer';
 import ProductShow from './components/ProductShow/ProductShow';
+import ShopContainer from './components/Shop/ShopContainer';
 
 export const CLOUD_NAME = 'dwfq3yxlm';
 export const BASE_URL = 'http://localhost:8080';
@@ -24,8 +24,9 @@ function App(props) {
           <Navigation />
           <Route exact path = '/' component={Home}/>
 
-          <Route exact path = '/products/:params1/:params2' component={BrandContainer}/>
-          <Route path = '/products/:id' component={ProductShow} />
+          <Route exact path = '/products/:params1/:params2' component={ShopContainer}/>
+          <Route exact path = '/products/:id' component={ProductShow} />
+          <Route exact path = '/products' component={ShopContainer} />
           
           <Route path = '/cart' component={CartContainer} />
 
@@ -35,7 +36,9 @@ function App(props) {
             {props.token ? <Redirect to='/'/> : <RegisterContainer />}
           </Route>
 
-          <Footer />
+          <footer>
+           <p>greenpaws &copy; 2020</p>
+          </footer>
         </div>
       </Switch>
     </Router>
