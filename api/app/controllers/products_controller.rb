@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:create, :filter_brand, :filter_category, :show, :popular_products]
+    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products]
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end
@@ -32,11 +32,20 @@ class ProductsController < ApplicationController
     end
 
     def popular_products
-        products = Product.select{|product| product.average_rating >= 4}
+        products = Product.select{|product| product.average_rating >= 5}
         if products.size <= 0
-            products = Product.all
+            products = Product.select{|product| product.category == 'toys'}
         end
         render json: products
+    end
+
+    def get_reviews
+        product = Product.find(params['id'])
+        if product
+            render json: product.reviews
+        else
+            render json: {message: 'Product not found!', status: 404}
+        end
     end
 
     private

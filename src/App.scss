@@ -707,6 +707,7 @@ nav {
     margin: 2em 0;
     h2 {
         color: $main-color;
+        font-family: 'Rubik';
     }
     .product-preview-container {
         padding: 1em;
@@ -831,6 +832,133 @@ nav {
             position: absolute;
             left: 94%;
             top: 15px;
+        }
+    }
+}
+.product-show-wrapper {
+    padding: 2em;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 1em 0;
+    box-sizing: border-box;
+    h2 {
+        font-family: 'Rubik';
+        font-weight: 100;
+        line-height: 1.4em;
+    }
+    h3 {
+        font-family: 'Rubik';
+        font-weight: 500;
+        font-size: 150%;
+        margin-bottom: .5em;
+    }
+    p {
+        line-height: 1.5em;
+    }
+    .image-controls {
+        flex: 1;
+        margin-right: 2em;
+        .slider {
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
+            max-width: 450px;
+            margin: 0 auto;
+            border: 1px solid $border-color;
+            .slider-image {
+                display: inline-block;
+                border: 1px solid $border-color;
+                margin: .2em;
+                width: 6rem;
+                height: 6rem;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        img {
+            display: block;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+    .product-details {
+        flex: 2;
+        padding: 0 3em;
+    }
+    .description-container {
+        max-width: 600px;
+    }
+    .reviews-detail {
+        position: relative;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 2em;
+        a {
+            color: $main-color;
+            display: block;
+            margin-bottom: 1em;
+
+        }
+        .review-count {
+            position: absolute;
+            top: 2.6em;
+            left: 5.4em;
+        }
+    }
+    .pricing-details {
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 2em;
+        margin-bottom: 1em;
+        .price {
+            font-size: 110%;
+            font-family: 'Rubik';
+            margin-bottom: 1em;
+            p {
+                max-width: 120px;
+                text-align: left;
+            }
+            span {
+                float: right;
+                color: $main-color;
+            }
+            .listing {
+                text-decoration: line-through;
+                color: red;
+            }
+        }
+        .cart-btn {
+            padding: 1em 2em;
+        }
+    }
+}
+.reviews-wrapper {
+    text-align: center;
+    margin: 2em 0;
+    padding: 2em;
+    box-sizing: border-box;
+    h2 {
+        color: $main-color;
+        font-family: 'Rubik';
+    }
+    h3 {
+        font-family: 'Rubik';
+        color: $main-color;
+    }
+    p {
+        line-height: 1.5em;
+    }
+    .review-box {
+        max-width: 800px;
+        border: 1px solid $border-color;
+        padding: 1em;
+        text-align: left;
+        margin: 1em auto;
+        .poster-name {
+            margin-top: 1em;
+            font-family: 'Rubik';
+            font-weight: 700;
         }
     }
 }

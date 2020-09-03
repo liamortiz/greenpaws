@@ -3,6 +3,7 @@ import { BASE_URL } from '../../App';
 import { CLOUD_NAME } from '../../App';
 import { Image } from 'cloudinary-react';
 import { paddPrice, getDiscountPrice } from '../../containers/Product';
+import { Link } from 'react-router-dom';
 
 class CartProductPreviews extends Component {
     state = {
@@ -35,7 +36,7 @@ class CartProductPreviews extends Component {
         return this.state.products.map((product, index) => 
             <div key = {index} className="product-box-preview">
                 
-                <Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} />
+                <Link to={`/products/${product.id}`}><Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} /></Link>
                 <div className="pricing">
                     <h2 className="title">{product.title}</h2>
 

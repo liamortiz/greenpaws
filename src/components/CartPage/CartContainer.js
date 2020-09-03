@@ -6,6 +6,7 @@ import { removeProductAsync, addProductAsync } from '../../redux/user';
 import { paddPrice, getDiscountPrice } from '../../containers/Product';
 import CartProductPreviews from './CartProductPreviews';
 import Checkout from './Checkout';
+import { Link } from 'react-router-dom';
 
 class CartContainer extends Component {
     state = {
@@ -26,7 +27,7 @@ class CartContainer extends Component {
         return this.props.products.map(({id, product}, index) => 
             <div key = {index} className="product-box">
                 
-                <Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} />
+                <Link to={`products/${product.id}`}><Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} /></Link>
                 <div className="pricing">
                     <h2 className="title">{product.title}</h2>
                     <p className="current-price">${ getDiscountPrice(product) }</p>

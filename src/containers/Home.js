@@ -33,7 +33,7 @@ class Home extends Component {
         return this.state.products.map((product, index) => {
             return (
                 <div key={index} className="product-box">
-                    <Link to=""><Image cloudName={CLOUD_NAME} publicId={product.image_urls[0]} /></Link>
+                    <Link to={`/products/${product.id}`}><Image cloudName={CLOUD_NAME} publicId={product.image_urls[0]} /></Link>
                     <div className="details">
                         <h3>{product.title.slice(0, 45)}..</h3>
                         <p className="current-price">${ getDiscountPrice(product) }</p>
