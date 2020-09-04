@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products]
+    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products, :get_brands]
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end
@@ -46,6 +46,12 @@ class ProductsController < ApplicationController
         else
             render json: {message: 'Product not found!', status: 404}
         end
+    end
+
+    def get_brands
+        brands = Product.all.map{|product| product.brand}
+        brands = brands.map{|brand| {name: brand, count: brands.count(brand) }}
+        render json: {brands: brands.uniq}
     end
 
     private

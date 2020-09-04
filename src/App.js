@@ -20,6 +20,7 @@ function App(props) {
   return (
     <Router>
       <Switch>
+        <>
         <div className="App">
           <Navigation />
           <Route exact path = '/' component={Home}/>
@@ -40,6 +41,7 @@ function App(props) {
            <p>greenpaws &copy; 2020</p>
           </footer>
         </div>
+        </>
       </Switch>
     </Router>
   );

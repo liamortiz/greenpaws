@@ -14,7 +14,7 @@ class CartProductPreviews extends Component {
     }
 
     setProducts() {
-        fetch(BASE_URL + '/products/category/toys')
+        fetch(BASE_URL + '/products/category/food')
         .then(resp => resp.json())
         .then(products => {
             this.setState({
@@ -40,9 +40,8 @@ class CartProductPreviews extends Component {
                 <div className="pricing">
                     <h2 className="title">{product.title}</h2>
 
-                    <div className="reviews">
+                    <div className="checkout-reviews">
                         {this.getReviews(product)}
-                        <span className="review-count">({product.review_count})</span>
                     </div>
 
                     <div className="price">

@@ -735,6 +735,7 @@ nav {
             }
             button {
                 margin-top: 1em;
+                padding: .6em 1em;
                 width: 8rem;
             }
             p {
@@ -744,7 +745,7 @@ nav {
             .previous-price {
                 text-indent: 1em;
             }
-            .reviews {
+            .checkout-reviews {
                 position: relative;
                 .review-count {
                     position: absolute;
@@ -859,6 +860,9 @@ nav {
     .image-controls {
         flex: 1;
         margin-right: 2em;
+        margin: 0;
+        position: relative;
+        min-width: 450px;
         .slider {
             overflow: hidden;
             display: flex;
@@ -948,7 +952,22 @@ nav {
         color: $main-color;
     }
     p {
-        line-height: 1.5em;
+        line-height:
+         1.5em;
+    }
+    button {
+        width: 3rem;
+        margin: .2em;
+        height: 2rem;
+        text-align: center;
+        border-radius: 10px;
+        transition: background-color .2s;
+        &:hover:not(.active-page) {
+            background: darken($color: $main-color, $amount: 10%);
+        }
+        &:focus {
+            outline: none;
+        }
     }
     .review-box {
         max-width: 800px;
@@ -968,8 +987,8 @@ nav {
     justify-content: center;
     flex-direction: row;
     .sorting-container {
-        display: inline-block;
-        margin-left: 20%;
+        float: right;
+        margin-top: 1.4em;
         select {
             padding: .5em;
             width: 10rem;
@@ -983,17 +1002,17 @@ nav {
         box-sizing: border-box;
         .sort-by {
             margin: 0 auto;
-            max-width: 1000px;
+            max-width: 700px;
             h1 {
                 color: $main-color;
                 font-family: 'Rubik';
                 display: inline-block;
                 margin: .5em 0;
+                margin-right: .5em;
                 text-indent: 2px;
             }
             span {
                 font-weight: 500;
-                margin-left: 1em;
                 color: rgb(43, 43, 43);
             }
         }
@@ -1022,9 +1041,20 @@ nav {
         }
         .products-container {
             display: flex;
-            justify-content: center;
-            flex-direction: row;
-            flex-wrap: wrap;
+            .filtering {
+                flex: 1;
+            }
+            .product-result-wrapper {
+                flex: 3;
+            }
+            .product-result {
+                flex: 3;
+                display: flex;
+                margin-left: 2em;
+                justify-content: flex-start;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
             .product-card {
                 border: 1px solid $border-color;
                 width: 14rem;
@@ -1066,6 +1096,56 @@ nav {
                     margin: 1em auto;
                 }
             }
+        }
+    }
+}
+.filtering {
+    .filter {
+        padding: 1em;
+        text-align: left;
+        border-bottom: 1px solid $border-color;
+        h2 {
+            font-family: 'Rubik';
+            font-weight: lighter;
+            font-size: 120%;
+        }
+        span {
+            display: block;
+            margin: .5em 0;
+            font-weight: 400;
+            padding-left: .5em;
+        }
+        input {
+            width: 1rem;
+            height: 1rem;
+            margin-right: .5em;
+        }
+    }
+    .filter-reviews {
+        button {
+            background: white;
+            margin: .2em 0;
+            display: block;
+            width: 100%;
+            color: black;
+            font-size: 90%;
+            font-weight: lighter;
+        }
+        span {
+            float: left;
+            width: 1rem;
+            height: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .filter-brand {
+        h2 {
+            padding-bottom: 1em;
+        }
+        .brand-names {
+            height: 20rem;
+            overflow-y: scroll;
         }
     }
 }
