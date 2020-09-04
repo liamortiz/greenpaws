@@ -10,7 +10,7 @@ const ShopDropdown = () => {
                 <Link to="">Dry Food</Link>
                 <Link to="">Puppy Food</Link>
                 <Link to="">Grain Free Food</Link>
-                <Link to="" className="btn">Shop All Food</Link>
+                <Link to="/products/category/food" className="btn">Shop All Food</Link>
             </div>
             <div>
                 <h2>Supplies<i className = "icon pet-supplies"></i></h2>
@@ -18,7 +18,7 @@ const ShopDropdown = () => {
                 <Link to="">Beds & Bedding</Link>
                 <Link to="">Bowls & Feeders</Link>
                 <Link to="">Dental Care</Link>
-                <Link to="" className="btn">Shop All Supplies</Link>
+                <Link to="/products/category/toys" className="btn">Shop All Supplies</Link>
             </div>
         </>
     )

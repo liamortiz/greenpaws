@@ -2,46 +2,45 @@ import React, { Component } from 'react';
 import { BASE_URL } from '../../App';
 import ProductCard from './ProductCard';
 
-class ShopContainer extends Component {
+class Dummy extends Component {
     state = {
         products: [],
-        productsOnPage: [],
         category: 'food',
         currentPage: 1,
-        maxResults: 20
+        maxResults: 20,
+        allResults: 0
     }
 
     componentDidMount() {
-        console.log("Mounted");
-        const category = this.props.match.params.params2 || "food";
-        if (category) {
-            this.setState({ 
+        this.fetchProducts()
+    }
+
+    componentDidUpdate() {
+        const category = this.props.match.params.params2;
+        if (category != this.state.category) {
+            this.setState({  
                 category
             })
-        }
-        this.fetchProducts(category)
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const category = this.props.match.params.params2;
-        if (category != prevState.category) {
-            this.fetchProducts(category)
+            this.fetchProducts()
         }
     }
 
-    fetchProducts(category=this.state.category) {
-        fetch(BASE_URL + `/products/category/${category}`)
+    fetchProducts() {
+        fetch(BASE_URL + `/products/category/${this.state.category}`)
             .then(resp => resp.json())
             .then(products => this.setProductCards(products));
     }
 
     setProductCards(products) {
-        const allProducts = products.map((product, index) => <ProductCard key={index} product={product} />);
+        const min = this.state.maxResults * (this.state.currentPage-1);
+        const max = min + this.state.maxResults;
+        const allProducts = products.slice(min, max);
         this.setState({
-            products: allProducts,
-            productsOnPage: allProducts.slice(0, this.state.maxResults)
+            products: allProducts.map((product, index) => <ProductCard key={index} product={product} />),
+            allResults: products.length
         })
     }
+
     getPageNumbers() {
         const pages = [];
         const min = 0;
@@ -136,4 +135,3 @@ class ShopContainer extends Component {
         )
     }
 }
-export default ShopContainer;
