@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BASE_URL } from '../../App';
 
 class FilterSettings extends Component {
     state = {
@@ -7,28 +6,34 @@ class FilterSettings extends Component {
         filterPrices: [],
         filterReviews: []
     }
-    componentDidMount() {
-        this.fetchAllBrands();
-    }
+    loaded = false;
 
+    shouldComponentUpdate(prevProps, prevState) {
+        return (prevState.filterPrices !== this.state.filterPrices) || (prevState.filterReviews !== this.state.filterReviews) || (prevState.brands !== this.state.brands) || !this.loaded
+    }
     componentDidUpdate(prevProps) {
         if (prevProps.products !== this.props.products) {
+            this.loaded = true;
+            this.setFilterBrands();
             this.setFilterPrices();
             this.setFilterReviews();
         }
     }
-
-    fetchAllBrands() {
-        fetch(BASE_URL + '/brands')
-            .then(resp => resp.json())
-            .then(data => this.setBrandInputs(data))
+    setFilterBrands() {
+        const brands = {};
+        const brandNames = this.props.products.map(product => product.props.product.brand);
+        brandNames.forEach(brand => (brands[brand] !== undefined ? brands[brand]++ : brands[brand]=1 ))
+        this.setBrandInputs(brands);
     }
-
-    setBrandInputs({brands}) {
-        const brandInputs = brands.map((brand, index) => <span key={index}><input type="checkbox" name={brand.name} value={brand.name} />{brand.name} ({brand.count})</span>);
-        this.setState({ brands: brandInputs })
+    setBrandInputs(brands) {
+        const brandInputs=[];
+        for(const value in brands) {
+            brandInputs.push(<span key={value}><input onClick={this.props.filterByBrand} type="checkbox" name={value} value={value} />{value} ({brands[value]})</span>)
+        }
+        this.setState({
+            brands: brandInputs
+        })
     }
-
     setFilterPrices() {
         const priceGroups={
             '<10': 0,
@@ -46,29 +51,31 @@ class FilterSettings extends Component {
             if (productPrice >= 50 && productPrice <= 100) priceGroups['50-100']++
         })
         const filterPrices = [
-            <span key={0}><input type="checkbox" name='<10' value='<10' />Less Than $10 ({priceGroups['<10']})</span>,
-            <span key={1}><input type="checkbox" name='<10' value='10-25' />$10 to $25 ({priceGroups['10-25']})</span>,
-            <span key={2}><input type="checkbox" name='<10' value='25-50' />$25 to $50 ({priceGroups['25-50']})</span>,
-            <span key={3}><input type="checkbox" name='<10' value='50-100' />$50 to $100 ({priceGroups['50-100']})</span>
+            <span key={0}><input type="checkbox" value='<10' />Less Than $10 ({priceGroups['<10']})</span>,
+            <span key={1}><input type="checkbox" value='10-25' />$10 to $25 ({priceGroups['10-25']})</span>,
+            <span key={2}><input type="checkbox" value='25-50' />$25 to $50 ({priceGroups['25-50']})</span>,
+            <span key={3}><input type="checkbox" value='50-100' />$50 to $100 ({priceGroups['50-100']})</span>
         ]
         this.setState({
             filterPrices
         })
     }
-
     setFilterReviews() {
         const ratings = this.props.products.map(product => product.props.product.average_rating);
         const ratingElements = [];
         for (let i = 1; i <= 5; i++) {
-            const quantity = ratings.filter(rating => rating==i).length
-            const button = <button name={i} key={i}>
-                <span className={(i>=1) ? "star star-full" : "star"}></span>
-                <span className={(i>=2) ? "star star-full" : "star"}></span>
-                <span className={(i>=3) ? "star star-full" : "star"}></span>
-                <span className={(i>=4) ? "star star-full" : "star"}></span>
-                <span className={(i>=5) ? "star star-full" : "star"}></span>({quantity})
-            </button>
-            ratingElements.push(button)
+            const quantity = ratings.filter(rating => Math.max(1, rating)===i).length
+            if (quantity > 0) {
+                const button = <button onClick={this.props.filterByRating} name={i} key={i}>
+                    <span className={(i>=1) ? "star star-full" : "star"}></span>
+                    <span className={(i>=2) ? "star star-full" : "star"}></span>
+                    <span className={(i>=3) ? "star star-full" : "star"}></span>
+                    <span className={(i>=4) ? "star star-full" : "star"}></span>
+                    <span className={(i>=5) ? "star star-full" : "star"}></span>({quantity})
+                </button>
+                ratingElements.push(button)
+            }
+            
         }
         this.setState({ 
             filterReviews: ratingElements

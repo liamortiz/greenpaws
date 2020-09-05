@@ -22,6 +22,7 @@ const ProductCard = ({ product }) => {
                 {getReviews(product)}
                 <span className="review-count">{product.review_count} Reviews</span>
             </div>
+            <p className="brand-name">by {product.brand}</p>
 
             <Link to={`/products/${product.id}`}>
             <Image cloudName={CLOUD_NAME} publicId={`${product.image_urls[0]}`} />
@@ -29,7 +30,6 @@ const ProductCard = ({ product }) => {
 
             <div className="pricing">
                 <h2 className="title">{product.title}</h2>
-
                 <div className="price">
                     <p className="current-price">${ getDiscountPrice(product) }</p>
                     { product.discount !== 0 && 

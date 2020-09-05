@@ -7,21 +7,20 @@ class ShopContainer extends Component {
     state = {
         products: [],
         productsOnPage: [],
-        category: 'food',
         currentPage: 1,
         maxResults: 20
     }
 
     componentDidMount() {
-        const category = this.props.match.params.params2;
-        if (this.state.category != category) {
-            console.log("Pass");
-        }
-        console.log(this.state.category);
         this.fetchProducts();
     }
-    fetchProducts(category=this.state.category) {
-        fetch(BASE_URL + `/products/category/${category}`)
+    componentDidUpdate(prevProps) {
+        if (prevProps.match.params.params2 !== this.props.match.params.params2) {
+            window.location.reload()
+        }
+    }
+    fetchProducts() {
+        fetch(BASE_URL + `/products/category/${this.props.match.params.params2 || 'food'}`)
             .then(resp => resp.json())
             .then(products => this.setProductCards(products));
     }
@@ -90,15 +89,50 @@ class ShopContainer extends Component {
     }
 
     filterByPrice = ({target}) => {
+        const min = this.state.maxResults * (this.state.currentPage-1);
+        const max = min + this.state.maxResults;
+        let products = this.state.products;
+
         switch(target.value) {
             case '<10':
-                this.setState({
-                    productsOnPage: this.state.products.filter(product => product.props.product.price < 10)
-                })
+                products = this.state.products.filter(product => product.props.product.price < 10);
+                break;
+            case '10-25':
+                products = this.state.products.filter(product => product.props.product.price >= 10 && product.props.product.price < 25);
+                break;
+            case '25-50':
+                products = this.state.products.filter(product => product.props.product.price >= 25 && product.props.product.price < 50);
+                break;
+            case '50-100':
+                products = this.state.products.filter(product => product.props.product.price >= 50 && product.props.product.price <= 100);
                 break;
             default:
                 break;
         }
+        this.setState({
+            products,
+            productsOnPage: products.slice(min, max)
+        })
+    }
+
+    filterByBrand = ({target}) => {
+        const min = this.state.maxResults * (this.state.currentPage-1);
+        const max = min + this.state.maxResults;
+        const products = this.state.products.filter(product => product.props.product.brand === target.value);
+        this.setState({
+            products,
+            productsOnPage: products.slice(min, max)
+        })
+    }
+    filterByRating = ({target}) => {
+        target = target.nodeName === 'BUTTON' ? target : target.parentNode;
+        const min = this.state.maxResults * (this.state.currentPage-1);
+        const max = min + this.state.maxResults;
+        const products = this.state.products.filter(product => Math.max(1, product.props.product.average_rating) === parseInt(target.name));
+        this.setState({
+            products,
+            productsOnPage: products.slice(min, max)
+        })
     }
 
     render() {
@@ -107,11 +141,17 @@ class ShopContainer extends Component {
                 <div className="product-browse">
                     <div className="products-container">
                         <div className="filtering">
-                            <FilterSettings products={this.state.products} filterByPrice={this.filterByPrice}/>
+
+                            <FilterSettings 
+                            products={this.state.products} 
+                            filterByPrice={this.filterByPrice} 
+                            filterByBrand={this.filterByBrand} 
+                            filterByRating={this.filterByRating} />
+
                         </div>
                         <div className="product-result-wrapper">
                         <div className="sort-by">
-                                <h1>Dog {this.state.category}</h1>
+                                <h1>Dog {this.props.match.params.params2 || 'food'}</h1>
                                 <span>
                                     ({(this.state.maxResults * (this.state.currentPage -  1) + 1)} - {Math.min(this.state.products.length, this.state.maxResults * this.state.currentPage)} of {this.state.products.length} results)
                                 </span>

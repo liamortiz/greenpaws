@@ -1062,6 +1062,10 @@ nav {
                 margin: .2em;
                 position: relative;
                 box-sizing: border-box;
+                .brand-name {
+                    color: $main-color;
+                    font-size: 90%;
+                }
                 .current-price {
                     font-size: 120%;
                 }
@@ -1080,6 +1084,7 @@ nav {
                 }
                 .review-count {
                     display: block;
+                    font-size: 95%;
                     margin-top: -.5em;
                 }
                 h2 {

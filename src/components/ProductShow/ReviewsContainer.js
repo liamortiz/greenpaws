@@ -64,7 +64,7 @@ class ReviewsContainer extends Component {
             <div className="wrapper reviews-wrapper">
                 <h2>Product Reviews</h2>
                 {this.getCurrentReviews()}
-                {this.getPageNumbers()}
+                {this.state.reviews.length > 0 && this.getPageNumbers()}
             </div>
         )
     }
