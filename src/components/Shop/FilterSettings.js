@@ -23,7 +23,7 @@ class FilterSettings extends Component {
     setBrandInputs(brands) {
         const brandInputs=[];
         for(const value in brands) {
-            brandInputs.push(<span key={value}><input onClick={this.props.filterByBrand} type="checkbox" name={value} value={value} />{value} ({brands[value]})</span>)
+            brandInputs.push(<span onClick={this.props.filterByBrand} key={value}><input type="checkbox" name={value} value={value} />{value} ({brands[value]})</span>)
         }
         this.setState({
             brands: brandInputs
@@ -46,10 +46,10 @@ class FilterSettings extends Component {
             if (productPrice >= 50 && productPrice <= 100) priceGroups['50-100']++
         })
         const filterPrices = [
-            <span key={0}><input type="checkbox" value='<10' />Less Than $10 ({priceGroups['<10']})</span>,
-            <span key={1}><input type="checkbox" value='10-25' />$10 to $25 ({priceGroups['10-25']})</span>,
-            <span key={2}><input type="checkbox" value='25-50' />$25 to $50 ({priceGroups['25-50']})</span>,
-            <span key={3}><input type="checkbox" value='50-100' />$50 to $100 ({priceGroups['50-100']})</span>
+            <span key={0}><input onClick={this.props.filterByPrice} type="checkbox" value='<10' />Less Than $10 ({priceGroups['<10']})</span>,
+            <span key={1}><input onClick={this.props.filterByPrice} type="checkbox" value='10-25' />$10 to $25 ({priceGroups['10-25']})</span>,
+            <span key={2}><input onClick={this.props.filterByPrice} type="checkbox" value='25-50' />$25 to $50 ({priceGroups['25-50']})</span>,
+            <span key={3}><input onClick={this.props.filterByPrice} type="checkbox" value='50-100' />$50 to $100 ({priceGroups['50-100']})</span>
         ]
         this.setState({
             filterPrices
@@ -81,15 +81,15 @@ class FilterSettings extends Component {
             <>
                 <div className="filter filter-price">
                     <h2>Price</h2>
-                    <form onChange={this.props.filterByPrice}>
+                    <form id="filter-price-form">
                         {this.state.filterPrices}
                     </form>
                 </div>
                 <div className="filter filter-brand">
                     <h2>Brands</h2>
-                    <div className="brand-names">
+                    <form className="brand-names" id="filter-brand-form">
                         {this.state.brands}
-                    </div>
+                    </form>
                 </div>
                 <div className="filter filter-reviews">
                     <h2>Average Rating</h2>

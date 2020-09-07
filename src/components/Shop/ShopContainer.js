@@ -7,16 +7,24 @@ class ShopContainer extends Component {
     state = {
         products: [],
         productsOnPage: [],
+        allProducts: [],
         currentPage: 1,
-        maxResults: 20
+        maxResults: 20,
+        currentFilters: []
     }
 
     componentDidMount() {
         this.fetchProducts();
     }
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.match.params.params2 !== this.props.match.params.params2) {
             window.location.reload()
+        }
+        if (prevState.currentFilters !== this.state.currentFilters) {
+            this.applyFilters();
+        }
+        if (prevState.products != this.state.products) {
+            this.updateCurrentPage(1);
         }
     }
     fetchProducts() {
@@ -29,13 +37,14 @@ class ShopContainer extends Component {
         const allProducts = products.map((product, index) => <ProductCard key={index} product={product} />);
         this.setState({
             products: allProducts,
-            productsOnPage: allProducts.slice(0, this.state.maxResults)
+            productsOnPage: allProducts.slice(0, this.state.maxResults),
+            allProducts
         })
     }
     getPageNumbers() {
         const pages = [];
         const min = 0;
-        const max = Math.floor(this.state.products.length / this.state.maxResults) + 1;
+        const max =  Math.floor(this.state.products.length / this.state.maxResults) + ((this.state.products.length % this.state.maxResults !== 0) ? 1 : 0);
         for (let i = min; i < max; i++) {
             pages.push(<button key={i} onClick={() => this.updateCurrentPage(i+1)} className={(i+1===this.state.currentPage) ? "active-page" : ""}>{i+1}</button>)
         }
@@ -88,50 +97,86 @@ class ShopContainer extends Component {
         })
     }
 
-    filterByPrice = ({target}) => {
+    applyFilters() {
         const min = this.state.maxResults * (this.state.currentPage-1);
         const max = min + this.state.maxResults;
-        let products = this.state.products;
+        let currentFilters=[...this.state.currentFilters];
+        let products = this.state.allProducts;
+        let filteredProducts=[];
 
-        switch(target.value) {
-            case '<10':
-                products = this.state.products.filter(product => product.props.product.price < 10);
-                break;
-            case '10-25':
-                products = this.state.products.filter(product => product.props.product.price >= 10 && product.props.product.price < 25);
-                break;
-            case '25-50':
-                products = this.state.products.filter(product => product.props.product.price >= 25 && product.props.product.price < 50);
-                break;
-            case '50-100':
-                products = this.state.products.filter(product => product.props.product.price >= 50 && product.props.product.price <= 100);
-                break;
-            default:
-                break;
+        // Handle Price
+        currentFilters.forEach(filter => {
+            if (filter === '<10') {
+                filteredProducts.push(products.filter(product => product.props.product.price < 10));
+            }
+            if (filter === '10-25') {
+                filteredProducts.push(products.filter(product => product.props.product.price >= 10 && product.props.product.price < 25));
+            }
+            if (filter === '25-50') {
+                filteredProducts.push(products.filter(product => product.props.product.price >= 25 && product.props.product.price < 50));
+            }
+            if (filter === '50-100') {
+                filteredProducts.push(products.filter(product => product.props.product.price >= 50 && product.props.product.price <= 100));
+            }
+            if (typeof filter === 'object' && filter.hasOwnProperty('brand')) {
+                filteredProducts.push(products.filter(product => product.props.product.brand === filter.brand));
+            }
+            if (typeof filter === 'object' && filter.hasOwnProperty('rating')) {
+                filteredProducts.push(products.filter(product => Math.max(1, product.props.product.average_rating) === filter.rating));
+            }
+        })
+       
+        filteredProducts = filteredProducts.flat();
+        if (filteredProducts.length <= 0) {
+            filteredProducts = products;
         }
         this.setState({
-            products,
-            productsOnPage: products.slice(min, max)
+            products: filteredProducts,
+            productsOnPage: filteredProducts.slice(min, max)
         })
     }
 
+    filterByPrice = ({target}) => {
+        document.getElementById('filter-brand-form').reset();
+
+        let currentFilters=[...this.state.currentFilters];
+        currentFilters = currentFilters.filter(element => typeof element==='string'); 
+
+        const filterIndex = currentFilters.indexOf(target.value);
+        if (filterIndex !== -1) {
+            currentFilters = currentFilters.slice(0, filterIndex).concat(currentFilters.slice(filterIndex+1));
+        } else {
+            currentFilters.push(target.value)
+        }
+        this.setState({ currentFilters })
+    }
+
     filterByBrand = ({target}) => {
-        const min = this.state.maxResults * (this.state.currentPage-1);
-        const max = min + this.state.maxResults;
-        const products = this.state.products.filter(product => product.props.product.brand === target.value);
+        document.getElementById('filter-price-form').reset();
+
+        let currentFilters=[...this.state.currentFilters];
+        currentFilters = currentFilters.filter(element => element.hasOwnProperty('brand')); 
+
+        const filterIndex = this.state.currentFilters.findIndex(element => element.brand === target.value);
+        if (filterIndex !== -1) {
+            currentFilters = currentFilters.slice(0, filterIndex).concat(currentFilters.slice(filterIndex+1));
+        } else {
+            currentFilters.push({brand: target.value})
+        }
         this.setState({
-            products,
-            productsOnPage: products.slice(min, max)
+            currentFilters
         })
     }
     filterByRating = ({target}) => {
         target = target.nodeName === 'BUTTON' ? target : target.parentNode;
-        const min = this.state.maxResults * (this.state.currentPage-1);
-        const max = min + this.state.maxResults;
-        const products = this.state.products.filter(product => Math.max(1, product.props.product.average_rating) === parseInt(target.name));
+
+        document.getElementById('filter-brand-form').reset();
+        document.getElementById('filter-price-form').reset();
+
+        const rating = parseInt(target.name);
+        const currentFilters=[{rating}]
         this.setState({
-            products,
-            productsOnPage: products.slice(min, max)
+            currentFilters
         })
     }
 
@@ -143,7 +188,7 @@ class ShopContainer extends Component {
                         <div className="filtering">
 
                             <FilterSettings 
-                            products={this.state.products} 
+                            products={this.state.allProducts} 
                             filterByPrice={this.filterByPrice} 
                             filterByBrand={this.filterByBrand} 
                             filterByRating={this.filterByRating} />

@@ -79,7 +79,7 @@ class ProductShow extends Component {
                 <div className="product-details">
                     <h2>{ title }</h2>
                     <div className="reviews-detail">
-                        <Link to="">by {brand}</Link>
+                        <Link to={`/products/brands/${brand}`}>by {brand}</Link>
                         {this.getAverageRating(this.state.currentProduct)}
                         <span className="review-count">({review_count}) Reviews</span>
                     </div>
