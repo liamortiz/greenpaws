@@ -12,6 +12,7 @@ class ShopContainer extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.match.params.params1);
         this.fetchProducts();
     }
     componentDidUpdate(prevProps) {
@@ -20,7 +21,7 @@ class ShopContainer extends Component {
         }
     }
     fetchProducts() {
-        fetch(BASE_URL + `/products/category/${this.props.match.params.params2 || 'food'}`)
+        fetch(BASE_URL + `/products/${this.props.match.params.params1 || 'category'}/${this.props.match.params.params2 || 'food'}`)
             .then(resp => resp.json())
             .then(products => this.setProductCards(products));
     }

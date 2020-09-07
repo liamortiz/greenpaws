@@ -6,7 +6,7 @@ const BrandContainer = () => {
         <div className = "wrapper brand-wrapper">
             <h1>Shop by Brand</h1>
             <div className="brands">
-                <div className="brand"><h2><Link to='/products/brands/Rubit'>Rubit</Link></h2></div>
+                <Link to='/products/brands/Rubit'><div className="brand"><h2>Rubit</h2></div></Link>
                 <div className="brand"><h2>Sun Seed</h2></div>
                 <div className="brand"><h2>Petmate</h2></div>
                 <div className="brand"><h2>Plexidor</h2></div>

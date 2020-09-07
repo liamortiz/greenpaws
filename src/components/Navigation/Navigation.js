@@ -10,14 +10,10 @@ class Navigation extends Component {
         this.state = {
             query: ""
         }
-
         this.shopElement = React.createRef();
     }
     showDropDown = (e) => {
-        const targetName = e.target.getAttribute('name');
-        if (targetName === 'shop') {
-            this.shopElement.current.style='max-height: 1000px';
-        }
+        this.shopElement.current.style='max-height: 1100px';
     }
     hideDropDown = () => {
         this.shopElement.current.style='max-height: 0';
@@ -38,19 +34,16 @@ class Navigation extends Component {
                 </NavLink>
     
                 <ul className="nav-items basic" onMouseLeave={this.hideDropDown}>
-                    <li 
-                    name="shop"
-                    onMouseEnter={this.showDropDown}
-                    className="expandable">
-                        <NavLink to="/products">Shop</NavLink>
+                    <li name="shop">
+                        <NavLink className="expandable can-hover" to="/products" activeClassName='is-active' onMouseEnter={this.showDropDown}>Shop</NavLink>
                         <div ref={this.shopElement} className="dropdown shop-dropdown">
                             <ShopDropdown />
                         </div>
                     </li>
     
-                    <li><NavLink to="/brands">Brands</NavLink></li>
+                    <li><NavLink className="can-hover" to="/brands" activeClassName='is-active' >Brands</NavLink></li>
     
-                    <li><NavLink to="/sales" activeClassName='is-active' >On Sale</NavLink></li>
+                    <li><NavLink className="can-hover" to="/sales" activeClassName='is-active' >On Sale</NavLink></li>
                 </ul>
     
                 <form className="search-bar">

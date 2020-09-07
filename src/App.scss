@@ -41,6 +41,10 @@ button {
     background-repeat: no-repeat;
 }
 
+.is-active {
+    background: darken($color: $main-color, $amount: 5%);
+}
+
 .star {
     display: inline-block;
     width: 1rem;
@@ -71,10 +75,9 @@ button {
 }
 .dropdown {
     position: absolute;
-    height: 20rem;
     background: $secondary-color;
     border-radius: 10px;
-    top: 2em;
+    top: 1.7em;
     left:0;
     max-height: 0;
     overflow: hidden;
@@ -120,8 +123,10 @@ button {
 }
 .shop-dropdown {
     width: 30rem;
-    height: 18rem;
+    height: 21.5rem;
     display: flex;
+    top: 3.2em;
+    left: 14.5em;
     justify-content: center;
     flex-direction: row;
     a {
@@ -131,43 +136,6 @@ button {
     div {
         flex: 1;
         padding: 2em;
-    }
-}
-.brands-dropdown {
-    width: 36rem;
-    height: 25rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    flex-direction: row;
-    text-align: center;
-    h2 {
-        font-size: 110%;
-    }
-    div {
-        padding: 2em;
-    }
-    img {
-        flex: 1;
-        width: 6rem;
-        height: 6rem;
-        margin: .2em;
-        border: 10px solid white;
-        border-radius: 5px;
-    }
-    .all-brands-btn {
-        text-align: center;
-        padding: .5em;
-        border-radius: 5px;
-        display: block;
-        margin: 1em auto;
-    }
-    .image-links {
-        &:hover {
-            img {
-                opacity: 0.9;
-            }
-        }
     }
 }
 .discount-bar {
@@ -208,20 +176,23 @@ nav {
     a {
         color: white;
         text-decoration: none;
+      
+        padding: .5em;
+        transition: background-color .2s ease-in-out;
+    }
+    .can-hover {
+        &:hover {
+            cursor: pointer;
+            background-color: darken($color: $main-color, $amount: 5%);
+        }
     }
     ul {
         li {
             float: left;
             list-style-type: none;
-            margin: 0 1em 0 1em;
             font-family: 'Rubik';
             font-size: 110%;
-            transition: background-color .2s ease-in-out;
-            padding: .5em;
-            &:hover {
-                cursor: pointer;
-                background-color: darken($color: $main-color, $amount: 5%);
-            }
+            margin: 0 1em 0 1em;
         }
         .expandable {
             position: relative;
@@ -1184,6 +1155,7 @@ nav {
 .brand-wrapper {
     max-width: 1000px;
     margin: 2em auto;
+    margin-bottom: 4em;
     h1 {
         color: $main-color;
         font-family: 'Rubik';
@@ -1196,6 +1168,10 @@ nav {
         justify-content: center;
         flex-wrap: wrap;
     }
+    a {
+        color: rgb(37, 37, 37);
+        text-decoration: none;
+    }
     .brand {
         margin: .2em;
         width: 10rem;
@@ -1204,10 +1180,6 @@ nav {
         border: 1px solid $border-color;
         text-align: center;
         display: table;
-        a {
-            color: rgb(37, 37, 37);
-            text-decoration: none;
-        }
         &:hover {
             border: 1px solid $main-color;
             cursor: pointer;
