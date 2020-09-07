@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products, :get_brands]
+    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products, :get_brands, :onsale]
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end
@@ -11,6 +11,10 @@ class ProductsController < ApplicationController
         else
             render json: product.errors.messages
         end
+    end
+
+    def onsale
+        render json: Product.select{|product| product.discount != 0}
     end
 
     def filter_category

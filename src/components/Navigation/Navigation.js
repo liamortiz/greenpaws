@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ShopDropdown from './ShopDropdown';
-import BrandsDropdown from './BrandsDropdown';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Navigation extends Component {
@@ -13,21 +12,14 @@ class Navigation extends Component {
         }
 
         this.shopElement = React.createRef();
-        this.brandsElement = React.createRef();
     }
     showDropDown = (e) => {
         const targetName = e.target.getAttribute('name');
         if (targetName === 'shop') {
             this.shopElement.current.style='max-height: 1000px';
-            this.brandsElement.current.style='max-height: 0';
-
-        } else if (targetName === 'brands') {
-            this.brandsElement.current.style='max-height: 1000px';
-            this.shopElement.current.style='max-height: 0';
         }
     }
     hideDropDown = () => {
-        this.brandsElement.current.style='max-height: 0';
         this.shopElement.current.style='max-height: 0';
     }
     handleChange = (e) => {
@@ -40,33 +32,25 @@ class Navigation extends Component {
         return (
             <>
             <nav>
-                <Link to="/">
+                <NavLink to="/">
                     <h1 className="logo">greenpaws<i className="icon paws"></i>
                     </h1>
-                </Link>
+                </NavLink>
     
                 <ul className="nav-items basic" onMouseLeave={this.hideDropDown}>
                     <li 
                     name="shop"
                     onMouseEnter={this.showDropDown}
                     className="expandable">
-                        <Link to="/products">Shop</Link>
+                        <NavLink to="/products">Shop</NavLink>
                         <div ref={this.shopElement} className="dropdown shop-dropdown">
                             <ShopDropdown />
                         </div>
                     </li>
     
-                    <li 
-                    name="brands"
-                    onMouseEnter={this.showDropDown}
-                    className="expandable">
-                        <Link to="/brands">Brands</Link>
-                        <div ref={this.brandsElement} className="dropdown brands-dropdown">
-                            <BrandsDropdown />
-                        </div>
-                    </li>
+                    <li><NavLink to="/brands">Brands</NavLink></li>
     
-                    <li>On Sale</li>
+                    <li><NavLink to="/sales" activeClassName='is-active' >On Sale</NavLink></li>
                 </ul>
     
                 <form className="search-bar">
@@ -77,19 +61,19 @@ class Navigation extends Component {
                 </form>
     
                 <div className="nav-items right-side">
-                    <Link to="/register">
+                    <NavLink to="/register">
                         <div className="small-container account-container">
                             <i className="icon account"></i>
                             <p>Account</p>
                         </div>
-                    </Link>
-                    <Link to="/cart">
+                    </NavLink>
+                    <NavLink to="/cart">
                         <div className="small-container cart-container">
                             <i className="icon cart"></i>
                             <p>Cart</p>
                             <span id="products-in-cart"><p> {this.props.productsInCart} </p></span>
                         </div>
-                    </Link>
+                    </NavLink>
                 </div>
             </nav>
              <div className="discount-bar">FREE 1-3 DAY SHIPPING OVER $30!</div>

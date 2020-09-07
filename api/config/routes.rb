@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get '/products/brands/:brand', to: 'products#filter_brand'
   get '/products/popular', to: 'products#popular_products'
   get '/products/:id/reviews', to: 'products#get_reviews'
+  get '/products/onsale', to: 'products#onsale'
   get '/brands', to: 'products#get_brands'
   
   resources :products

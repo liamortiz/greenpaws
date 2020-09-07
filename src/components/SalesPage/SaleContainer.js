@@ -1,10 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
+import salesHero from '../../assets/images/deals.jpg'
+import { BASE_URL } from '../../App';
+import ProductCard from '../Shop/ProductCard';
 
-const SaleContainer = () => {
-    return (
-        <div className = "wrapper sale-wrapper">
-            <h1>Hello from Sales</h1>
-        </div>
-    )
+class SaleContainer extends Component {
+    state={products:[]}
+
+    componentDidMount() {
+        this.fetchProducts()
+    }
+    fetchProducts() {
+        fetch(BASE_URL + '/products/onsale')
+            .then(resp => resp.json())
+            .then(products => this.setProductCards(products));
+    }
+
+    setProductCards(products) {
+        const allProducts = products.map((product, index) => <ProductCard key={index} product={product} />);
+        this.setState({
+            products: allProducts
+        })
+    }
+    render() {
+        return (
+            <div className = "wrapper sales-wrapper">
+                <img className="hero" src={salesHero} />
+                <p className="heading">Looking for deals on your favorite brands of pet food and treats?</p>
+                <div className="product-wrapper">
+                    <div className="products-onsale">
+                        {this.state.products}
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 export default SaleContainer;
