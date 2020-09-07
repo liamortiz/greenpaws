@@ -24,7 +24,7 @@ class SaleContainer extends Component {
     render() {
         return (
             <div className = "wrapper sales-wrapper">
-                <img className="hero" src={salesHero} />
+                <img className="hero" src={salesHero} alt="On Sale Products" />
                 <p className="heading">Looking for deals on your favorite brands of pet food and treats?</p>
                 <div className="product-wrapper">
                     <div className="products-onsale">

@@ -53,7 +53,7 @@ class ReviewsContainer extends Component {
     getPageNumbers() {
         const pages = [];
         const min = 0;
-        const max = (this.state.reviews.length === 5) ? 1 : Math.floor(this.state.reviews.length / this.state.maxResults) + 1;
+        const max = Math.floor(this.state.reviews.length / this.state.maxResults) + ((this.state.reviews.length % this.state.maxResults !== 0) ? 1 : 0);
         for (let i = min; i < max; i++) {
             pages.push(<button key={i} onClick={() => this.updateCurrentPage(i+1)} className={(i+1===this.state.currentPage) ? "active-page" : ""}>{i+1}</button>)
         }

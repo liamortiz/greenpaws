@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
     skip_before_action :authorized, only: [:create]
     def create
         # This needs to change before production
-        products = Product.select{|product| product.category == 'toys'}
+        products = Product.select{|product| product.category == 'rawhide'}
 
         user_id = User.all.sample().id
         product_id = products.sample().id

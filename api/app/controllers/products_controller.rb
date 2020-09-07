@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, :show, :popular_products, :get_brands, :onsale]
+    skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, 
+    :show, :popular_products, :get_brands, :onsale, :get_multiple_categories]
+
     def show
         render json: Product.find(params['id']), include: [:reviews]
     end
@@ -56,6 +58,15 @@ class ProductsController < ApplicationController
         brands = Product.all.map{|product| product.brand}
         brands = brands.map{|brand| {name: brand, count: brands.count(brand) }}
         render json: {brands: brands.uniq}
+    end
+
+    def get_multiple_categories
+        categories = params['q'].split('&')
+        products = []
+        categories.each do |category|
+            products += Product.select{|p| p.category == category}
+        end
+        render json: products
     end
 
     private

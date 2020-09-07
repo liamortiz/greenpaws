@@ -56,8 +56,10 @@ class ProductShow extends Component {
     }
 
     addProduct = () => {
-        if (this.props.user) {
+        if (this.props.token) {
             this.props.addProductAsync(this.props.token, this.state.currentProduct.id, this.props.user.cart.id);
+        } else {
+            window.location.assign('/register');
         }
     }
 

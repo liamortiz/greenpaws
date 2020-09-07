@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import ShopDropdown from './ShopDropdown';
+import AccountDropdown from './AccountDropdown';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             query: ""
         }
         this.shopElement = React.createRef();
+        this.accountElement = React.createRef();
     }
     showDropDown = (e) => {
-        this.shopElement.current.style='max-height: 1100px';
+        const name = e.target.getAttribute('name');
+        if (name === 'shop') {
+            this.shopElement.current.style='max-height: 1100px';
+        } else if (name === 'account') {
+            this.accountElement.current.style='max-height: 1100px';
+        }
     }
     hideDropDown = () => {
         this.shopElement.current.style='max-height: 0';
+        this.accountElement.current.style='max-height: 0';
     }
     handleChange = (e) => {
         this.setState({
@@ -34,8 +41,8 @@ class Navigation extends Component {
                 </NavLink>
     
                 <ul className="nav-items basic" onMouseLeave={this.hideDropDown}>
-                    <li name="shop">
-                        <NavLink className="expandable can-hover" to="/products" activeClassName='is-active' onMouseEnter={this.showDropDown}>Shop</NavLink>
+                    <li>
+                        <NavLink name="shop" className="expandable can-hover" to="/products" activeClassName='is-active' onMouseEnter={this.showDropDown}>Shop</NavLink>
                         <div ref={this.shopElement} className="dropdown shop-dropdown">
                             <ShopDropdown />
                         </div>
@@ -53,20 +60,28 @@ class Navigation extends Component {
                     </div>
                 </form>
     
-                <div className="nav-items right-side">
-                    <NavLink to="/register">
-                        <div className="small-container account-container">
-                            <i className="icon account"></i>
-                            <p>Account</p>
+                <div className="nav-items right-side" onMouseLeave={this.hideDropDown}>
+                    <li onMouseEnter={this.showDropDown} name="account">
+                        <NavLink to="/register" name="account">
+                            <div className="small-container account-container">
+                                <i className="icon account"></i>
+                                <p name="account">Account</p>
+                            </div>
+                        </NavLink>
+                        <div ref={this.accountElement} className="dropdown account-dropdown">
+                                <AccountDropdown />
                         </div>
-                    </NavLink>
-                    <NavLink to="/cart">
-                        <div className="small-container cart-container">
-                            <i className="icon cart"></i>
-                            <p>Cart</p>
-                            <span id="products-in-cart"><p> {this.props.productsInCart} </p></span>
-                        </div>
-                    </NavLink>
+                    </li>
+                    
+                    <li>
+                        <NavLink to="/cart">
+                            <div className="small-container cart-container">
+                                <i className="icon cart"></i>
+                                <p>Cart</p>
+                                <span id="products-in-cart"><p> {this.props.productsInCart} </p></span>
+                            </div>
+                        </NavLink>
+                    </li>
                 </div>
             </nav>
              <div className="discount-bar">FREE 1-3 DAY SHIPPING OVER $30!</div>

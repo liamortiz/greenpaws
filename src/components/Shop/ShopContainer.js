@@ -12,7 +12,6 @@ class ShopContainer extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.params1);
         this.fetchProducts();
     }
     componentDidUpdate(prevProps) {
@@ -152,7 +151,7 @@ class ShopContainer extends Component {
                         </div>
                         <div className="product-result-wrapper">
                         <div className="sort-by">
-                                <h1>Dog {this.props.match.params.params2 || 'food'}</h1>
+                                <h1>Product Results</h1>
                                 <span>
                                     ({(this.state.maxResults * (this.state.currentPage -  1) + 1)} - {Math.min(this.state.products.length, this.state.maxResults * this.state.currentPage)} of {this.state.products.length} results)
                                 </span>

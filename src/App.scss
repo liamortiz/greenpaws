@@ -58,6 +58,9 @@ button {
 .star-full {
     background-image: url('./assets/icons/star-full.svg');
 }
+.active-page {
+    background: darken($color: $main-color, $amount: 20%);
+}
 .wrapper {
     width: 100%;
 }
@@ -131,11 +134,42 @@ button {
     flex-direction: row;
     a {
         display: block;
-        margin: .5em 0;
+        margin: .1em 0;
     }
     div {
         flex: 1;
         padding: 2em;
+    }
+}
+.account-dropdown {
+    width: 11rem;
+    height: 8rem;
+    top: 4em;
+    left: 1.7em;
+    a {
+        display: block;
+    }
+    button {
+        display: block;
+        margin: 0 auto;
+        margin-top: 1em !important;
+        padding: .2em;
+    }
+    .btn {
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 2em;
+        padding: .5em;
+        box-shadow: 15px 5px 5px rgba(56, 56, 56, 0.1);
+    }
+    .btn:nth-child(2) {
+        margin-top: 0.5em;
+    }
+    button {
+        background: red;
+        &:hover {
+            background: darken($color: red, $amount: 10%);
+        }
     }
 }
 .discount-bar {
@@ -244,6 +278,12 @@ nav {
         display: flex;
         justify-content: flex-end;
         max-width: 15rem;
+        li {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
         .cart-container {
             position: relative;
         }
@@ -555,6 +595,7 @@ nav {
         color: $main-color;
         font-size: 200%;
         margin-bottom: 1em;
+        font-family: 'Rubik';
     }
     form {
         width: 20rem;
@@ -991,9 +1032,6 @@ nav {
             margin: 1em auto;
             display: flex;
             justify-content: center;
-            .active-page {
-                background: darken($color: $main-color, $amount: 20%);
-            }
             button {
                 width: 3rem;
                 margin: .2em;
@@ -1097,6 +1135,7 @@ nav {
         }
     }
     .filter-reviews {
+        min-height: 8rem;
         button {
             background: white;
             margin: .2em 0;

@@ -65,7 +65,7 @@ class CartContainer extends Component {
         if (this.props.token) {
             this.props.addProductAsync(this.props.token, product.id, this.props.user.cart.id)
         } else {
-            console.log("Add the product to the cart only on the local side, maybe a custom action");
+            window.location.assign('/register');
         }
     }
 

@@ -6,14 +6,9 @@ class FilterSettings extends Component {
         filterPrices: [],
         filterReviews: []
     }
-    loaded = false;
-
-    shouldComponentUpdate(prevProps, prevState) {
-        return (prevState.filterPrices !== this.state.filterPrices) || (prevState.filterReviews !== this.state.filterReviews) || (prevState.brands !== this.state.brands) || !this.loaded
-    }
+ 
     componentDidUpdate(prevProps) {
         if (prevProps.products !== this.props.products) {
-            this.loaded = true;
             this.setFilterBrands();
             this.setFilterPrices();
             this.setFilterReviews();
