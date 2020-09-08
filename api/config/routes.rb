@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/products/onsale', to: 'products#onsale'
   get '/brands', to: 'products#get_brands'
   get '/products/categories/:q', to: 'products#get_multiple_categories'
+  get '/products/?name=:name', to: 'products#index'
 
   resources :products
 end

@@ -14,7 +14,7 @@ class CartProductPreviews extends Component {
     }
 
     setProducts() {
-        fetch(BASE_URL + '/products/category/food')
+        fetch(BASE_URL + '/products/category/clothes')
         .then(resp => resp.json())
         .then(products => {
             this.setState({

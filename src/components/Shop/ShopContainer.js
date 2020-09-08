@@ -23,12 +23,12 @@ class ShopContainer extends Component {
         if (prevState.currentFilters !== this.state.currentFilters) {
             this.applyFilters();
         }
-        if (prevState.products != this.state.products) {
+        if (prevState.products !== this.state.products) {
             this.updateCurrentPage(1);
         }
     }
     fetchProducts() {
-        fetch(BASE_URL + `/products/${this.props.match.params.params1 || 'category'}/${this.props.match.params.params2 || 'food'}`)
+        fetch(BASE_URL + this.props.location.pathname + this.props.location.search)
             .then(resp => resp.json())
             .then(products => this.setProductCards(products));
     }

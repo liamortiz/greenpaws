@@ -1,6 +1,16 @@
 class ProductsController < ApplicationController
     skip_before_action :authorized, only: [:create, :get_reviews, :filter_brand, :filter_category, 
-    :show, :popular_products, :get_brands, :onsale, :get_multiple_categories]
+    :show, :popular_products, :get_brands, :onsale, :get_multiple_categories, :index]
+
+    def index
+        product_name = params['name'].downcase
+        products = Product.select{|product| product.title.downcase.include?(product_name)}
+        if products.size > 0
+            render json: products
+        else
+            render json: Product.all
+        end
+    end
 
     def show
         render json: Product.find(params['id']), include: [:reviews]
@@ -39,7 +49,7 @@ class ProductsController < ApplicationController
 
     def popular_products
         products = Product.select{|product| product.average_rating >= 5}
-        if products.size <= 0
+        if products.size < 6
             products = Product.select{|product| product.category == 'toys'}
         end
         render json: products

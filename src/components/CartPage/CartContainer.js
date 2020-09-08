@@ -34,12 +34,6 @@ class CartContainer extends Component {
                     { product.discount !== 0 && <p className="previous-price">${paddPrice(product.price)}</p>}
 
                 </div>
-                <div className="quantity">
-                    <button className="icon minus"></button>
-                    <span>1</span>
-                    <button className="icon plus"></button>
-                </div>
-
                 <button onClick = {() => this.props.removeProductAsync(this.props.token, id)} className="icon remove"></button>
             </div>
             )

@@ -30,6 +30,10 @@ class Navigation extends Component {
             query: e.target.value
         })
     }
+    search = (e) => {
+        e.preventDefault();
+        window.location=`/products/?name=${this.state.query}`
+    }
 
     render() {
         return (
@@ -42,7 +46,7 @@ class Navigation extends Component {
     
                 <ul className="nav-items basic" onMouseLeave={this.hideDropDown}>
                     <li>
-                        <NavLink name="shop" className="expandable can-hover" to="/products" activeClassName='is-active' onMouseEnter={this.showDropDown}>Shop</NavLink>
+                        <NavLink name="shop" className="expandable can-hover" to="/products/category/food" activeClassName='is-active' onMouseEnter={this.showDropDown}>Shop</NavLink>
                         <div ref={this.shopElement} className="dropdown shop-dropdown">
                             <ShopDropdown />
                         </div>
@@ -52,7 +56,7 @@ class Navigation extends Component {
                     <li><NavLink className="can-hover" to="/sales" activeClassName='is-active' >On Sale</NavLink></li>
                 </ul>
     
-                <form className="search-bar">
+                <form className="search-bar" onSubmit={this.search}>
                     <div className="search-wrapper">
                         <input type="text" placeholder="Search Our Store" value={this.state.query} onChange={this.handleChange}/>
                         <button type="submit"><i className= "icon search"></i></button>
