@@ -48,8 +48,7 @@ class Navigation extends Component {
                         </div>
                     </li>
     
-                    <li><NavLink className="can-hover" to="/brands" activeClassName='is-active' >Brands</NavLink></li>
-    
+                    
                     <li><NavLink className="can-hover" to="/sales" activeClassName='is-active' >On Sale</NavLink></li>
                 </ul>
     
