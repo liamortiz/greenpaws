@@ -12,7 +12,7 @@ const AccountDropdown = (props) => {
             <div>
                 {props.token &&
                 <>
-                    <Link to="/products/category/food" className="btn">View Account</Link>
+                    
                     <button className="btn" onClick={signOut}>Sign Out</button>
                 </>
                 }

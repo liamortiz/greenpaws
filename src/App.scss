@@ -143,7 +143,7 @@ button {
 }
 .account-dropdown {
     width: 11rem;
-    height: 8rem;
+    height: 7rem;
     top: 4em;
     left: 1.7em;
     a {
@@ -153,12 +153,12 @@ button {
         display: block;
         margin: 0 auto;
         margin-top: 1em !important;
-        padding: .2em;
+        padding: 1em !important;
     }
     .btn {
         width: 80%;
         margin: 0 auto;
-        margin-top: 2em;
+        margin-top: 1em;
         padding: .5em;
         box-shadow: 15px 5px 5px rgba(56, 56, 56, 0.1);
     }
