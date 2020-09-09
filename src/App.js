@@ -13,7 +13,7 @@ import ProductShow from './components/ProductShow/ProductShow';
 import ShopContainer from './components/Shop/ShopContainer';
 
 export const CLOUD_NAME = 'dwfq3yxlm';
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'https://green-paws.herokuapp.com'; //'http://localhost:8080';
 
 function App(props) {
   return (
