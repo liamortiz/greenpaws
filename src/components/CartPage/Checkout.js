@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Checkout extends Component {
     render() {
         return (
-            <form onSubmit={this.props.placeOrder}>
+            <form onSubmit={this.props.placeOrder} id="checkout-form">
                 <h2>Billing Details</h2>
                 <input placeholder="First Name" type="text" name="firstName" className="name"/>
                 <input placeholder="Last Name" type="text" name="lastName" className="name"/>

@@ -38,10 +38,12 @@ class Navigation extends Component {
     render() {
         return (
             <>
+            <NavLink to="/" className="mobile-logo">
+                    <h1>greenpaws<i className="icon paws"></i></h1>
+            </NavLink>
             <nav>
                 <NavLink to="/">
-                    <h1 className="logo">greenpaws<i className="icon paws"></i>
-                    </h1>
+                    <h1 className="logo">greenpaws<i className="icon paws"></i></h1>
                 </NavLink>
     
                 <ul className="nav-items basic" onMouseLeave={this.hideDropDown}>

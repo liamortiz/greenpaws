@@ -21,9 +21,9 @@ class Gallery extends Component {
     render() {
         return (
             <div className="gallery-wrapper">
-                <img alt="doggy" className="slider" src={hero1} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
-                <img alt="doggy" className="slider" src={hero2} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
-                <img alt="doggy" className="slider" src={hero3} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
+                <img alt="doggy" className="islider" src={hero1} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
+                <img alt="doggy" className="islider" src={hero2} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
+                <img alt="doggy" className="islider" src={hero3} style={{transform: `translateX(${this.state.currentIndex}%)` }}/>
                 <div className="nav-circles">
                     <span data-index="0" onClick={this.updateIndex} className="active-circle"></span>
                     <span data-index="-100" onClick={this.updateIndex}></span>

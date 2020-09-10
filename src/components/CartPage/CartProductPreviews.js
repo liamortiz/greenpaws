@@ -58,7 +58,7 @@ class CartProductPreviews extends Component {
     render() {
         return (
             <div className="cart-product-previews">
-                <h2>Customers Also Viewed</h2>
+                <h2>Other Popular Items</h2>
                 <div className="container product-preview-container">
                     {this.getProducts()}
                 </div>
