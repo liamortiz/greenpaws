@@ -1,5 +1,7 @@
 # Greenpaws :dog:
 
+<img src="https://i.ibb.co/stRhT76/greenpaws.png" alt="greenpaws" border="0" />
+
 ### Technologies Used
 <p>Back-end</p>
 <ul>
