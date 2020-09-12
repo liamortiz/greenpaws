@@ -163,9 +163,9 @@ button {
 }
 .account-dropdown {
     width: 11rem;
-    height: 7rem;
     top: 4em;
     left: 1.7em;
+    padding: 0 .5em;
     a {
         display: block;
     }
@@ -363,14 +363,14 @@ nav {
 }
 .gallery-wrapper {
     width: 100%;
-    margin: 0 auto;
     min-height: 10rem;
-    overflow: hidden;
     position: relative;
     display: flex;
     img {
-        display: inline-block;
+        flex: 1;
         width: 100%;
+        min-width: 100%;
+        height: auto;
         transition: all .5s ease-in-out;
     }
     .nav-circles {
@@ -391,9 +391,6 @@ nav {
         .active-circle {
             background: $main-color;
         }
-    }
-    .islider {
-        flex: 1;
     }
 }
 .home-wrapper {

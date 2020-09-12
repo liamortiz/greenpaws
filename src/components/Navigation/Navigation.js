@@ -16,14 +16,14 @@ class Navigation extends Component {
     showDropDown = (e) => {
         const name = e.target.getAttribute('name');
         if (name === 'shop') {
-            this.shopElement.current.style='max-height: 1100px';
+            this.shopElement.current.style='max-height: 1100px; padding-bottom: .5em';
         } else if (name === 'account') {
-            this.accountElement.current.style='max-height: 1100px';
+            this.accountElement.current.style='max-height: 1100px; padding-bottom: .5em';
         }
     }
     hideDropDown = () => {
-        this.shopElement.current.style='max-height: 0';
-        this.accountElement.current.style='max-height: 0';
+        this.shopElement.current.style='max-height: 0; padding-bottom: 0';
+        this.accountElement.current.style='max-height: 0; padding-bottom: 0';
     }
     handleChange = (e) => {
         this.setState({
