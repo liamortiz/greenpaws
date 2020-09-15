@@ -1,6 +1,6 @@
-# Greenpaws :dog:
+# Greenpaws eCommerce :dog:
 
-<img src="https://i.ibb.co/stRhT76/greenpaws.png" alt="greenpaws" border="0" />
+<img src="https://i.ibb.co/FhZFRyw/screencapture-greenpawsv13-web-app-products-categories-clothes-toys-beds-feeders-dental-2020-09-15-1.png" alt="screencapture-greenpawsv13-web-app-products-categories-clothes-toys-beds-feeders-dental-2020-09-15-1" border="0">
 
 ### Technologies Used
 <p>Back-end</p>
