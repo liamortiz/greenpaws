@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BASE_URL } from '../../App';
 import { CLOUD_NAME } from '../../App';
 import { Image } from 'cloudinary-react';
-import { paddPrice, getDiscountPrice } from '../../containers/Product';
+import { paddPrice, getDiscountPrice } from '../Product';
 import { Link } from 'react-router-dom';
 
 class CartProductPreviews extends Component {

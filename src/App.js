@@ -4,7 +4,7 @@ import './mobile.scss';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Home from './containers/Home';
+import Home from './components/Home';
 import Navigation from './components/Navigation/Navigation';
 import SaleContainer from './components/SalesPage/SaleContainer';
 import RegisterContainer from './components/Register/RegisterOrLogin';

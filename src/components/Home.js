@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Gallery from '../components/Gallery/Gallery';
+import Gallery from './Gallery/Gallery';
 import { BASE_URL } from '../App';
 import { CLOUD_NAME } from '../App';
 import { Image } from 'cloudinary-react';

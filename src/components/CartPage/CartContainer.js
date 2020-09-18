@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Image } from 'cloudinary-react';
 import { CLOUD_NAME } from '../../App';
 import { removeProductAsync, addProductAsync } from '../../redux/user';
-import { paddPrice, getDiscountPrice } from '../../containers/Product';
+import { paddPrice, getDiscountPrice } from '../Product';
 import CartProductPreviews from './CartProductPreviews';
 import Checkout from './Checkout';
 import { Link } from 'react-router-dom';

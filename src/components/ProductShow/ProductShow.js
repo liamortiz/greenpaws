@@ -3,7 +3,7 @@ import { BASE_URL } from '../../App';
 import { connect } from 'react-redux';
 import { Image } from 'cloudinary-react';
 import { CLOUD_NAME } from '../../App';
-import { paddPrice, getDiscountPrice } from '../../containers/Product';
+import { paddPrice, getDiscountPrice } from '../Product';
 import { Link } from 'react-router-dom';
 import { addProductAsync } from '../../redux/user';
 import ReviewsContainer from './ReviewsContainer';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { CLOUD_NAME } from '../../App';
 import { Image } from 'cloudinary-react';
-import { paddPrice, getDiscountPrice } from '../../containers/Product';
+import { paddPrice, getDiscountPrice } from '../Product';
 
 const ProductCard = ({ product }) => {
 
